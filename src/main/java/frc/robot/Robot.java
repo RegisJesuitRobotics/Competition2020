@@ -25,7 +25,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * creating this project, you must also update the build.gradle file in the
  * project.
  */
-public class Robot extends TimedRobot {}
+public class Robot extends TimedRobot {
   public static OI m_oi;
   public static DriveTrain m_DriveTrain = new DriveTrain();
   public static LimeLight m_LimeLight = new LimeLight();

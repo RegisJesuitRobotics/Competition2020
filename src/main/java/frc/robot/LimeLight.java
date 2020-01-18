@@ -16,6 +16,14 @@ public class LimeLight extends TimedRobot{
 
     public static DriveTrain m_DriveTrain = new DriveTrain();
 
+    NetworkTableInstance instance = NetworkTableInstance.getDefault();
+  NetworkTable table = instance.getTable("limelight-limeboi");
+  NetworkTable fms=instance.getTable("FMSInfo");
+  NetworkTableEntry g=fms.getEntry("StationNumber");
+  NetworkTableEntry tx = table.getEntry("tx");
+  NetworkTableEntry ty = table.getEntry("ty");
+  NetworkTableEntry ta = table.getEntry("ta");
+
 
 
     public void sendData(){
