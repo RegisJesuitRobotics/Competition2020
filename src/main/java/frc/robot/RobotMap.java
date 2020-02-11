@@ -25,9 +25,30 @@ public class RobotMap {
   // public static int rangefinderModule = 1;
   
   public static final int DRIVER_CONTROLLER = 0;
-  
+  //drive controller constants
   public static final int LEFT_STICK_X = 0;
 	public static final int LEFT_TRIGGER_PORT = 3;
-	public static final int RIGHT_TRIGGER_PORT = 4;
+  public static final int RIGHT_TRIGGER_PORT = 4;
+
+  //drive constants
+  public static final double DEADZONE = 0.1;
+  public static final double LIMITER = 0.8;
+
+  //shooter ports
+public static final int INTAKE_PORT = 0;
+public static final int BELT_PORT = 0;
+public static final int SHOOTER_WHEELS_PORT = 0;
+public static final int ADJUST_PORT = 0;
+
+  //color wheel ports
+public static final int COLOR_WHEEL_MOTOR_PORT = 0;
+
+  //drive train ports
+public static final int LEFT_BACK_PORT = 15;
+public static final int LEFT_FRONT_PORT = 14;
+public static final int RIGHT_BACK_PORT = 0;
+public static final int RIGHT_FRONT_PORT = 1;
+public static final int INTAKE_DROP_PORT = 42069;
+
 
 }

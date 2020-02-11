@@ -3,6 +3,8 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -13,28 +15,32 @@ public class DriveTrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-    private CANSparkMax leftBack, leftFront, rightBack, rightFront;
+    private TalonSRX leftBack, leftFront, rightBack, rightFront;
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new Drive());
-    leftBack = new CANSparkMax(2, MotorType.kBrushless);
-    leftFront = new CANSparkMax(15, MotorType.kBrushless);
-    rightBack = new CANSparkMax(1, MotorType.kBrushless);
-    rightFront = new CANSparkMax(14, MotorType.kBrushless);
+    leftBack = new TalonSRX(RobotMap.LEFT_BACK_PORT);
+    leftFront = new TalonSRX(RobotMap.LEFT_FRONT_PORT);
+    rightBack = new TalonSRX(RobotMap.RIGHT_BACK_PORT);
+    rightFront = new TalonSRX(RobotMap.RIGHT_FRONT_PORT);
 
   }
-  public void setLeftMotorBack(double leftSpeedBack){
-leftBack.set(leftSpeedBack);
-  }
-  public void setRightMotorBack(double rightSpeedBack){
-rightBack.set(rightSpeedBack);
-  }
-  public void setRightMotorFront(double rightSpeedFront){
-    rightFront.set(rightSpeedFront);
-      }
-      public void setLeftMotorFront(double leftSpeedFront){
-        leftFront.set(leftSpeedFront);
-          }
+public void setLeftMotorBack(double leftBackSpeed){
+leftBack.set(ControlMode.PercentOutput,leftBackSpeed);
+}
+
+public void setRightMotorBack(double rightBackSpeed){
+rightBack.set(ControlMode.PercentOutput,rightBackSpeed);
+}
+
+public void setRightMotorFront(double rightFrontSpeed){
+rightFront.set(ControlMode.PercentOutput,rightFrontSpeed);
+}
+
+public void setLeftMotorFront(double leftFrontSpeed){
+leftFront.set(ControlMode.PercentOutput,leftFrontSpeed);
+}
+
 }

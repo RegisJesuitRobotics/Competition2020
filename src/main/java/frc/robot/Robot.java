@@ -14,7 +14,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.LimeLight;
+import frc.robot.subsystems.Shooter;
+import frc.robot.commands.AutoMove;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -28,16 +29,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends TimedRobot {
   public static OI m_oi;
   public static DriveTrain m_DriveTrain = new DriveTrain();
-  public static LimeLight m_LimeLight = new LimeLight();
+  public static Shooter m_Shooter = new Shooter();
   
-  NetworkTableInstance instance = NetworkTableInstance.getDefault();
-  NetworkTable table = instance.getTable("limelight-limeboi");
-  NetworkTable fms=instance.getTable("FMSInfo");
-  NetworkTableEntry g=fms.getEntry("StationNumber");
-  NetworkTableEntry tx = table.getEntry("tx");
-  NetworkTableEntry ty = table.getEntry("ty");
-  NetworkTableEntry ta = table.getEntry("ta");
-
+  
 
   //NetworkTableInstance.getDefault()
   
@@ -119,7 +113,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    Scheduler.getInstance().run();
+
+    //call autonomous commands here
+
+
   }
 
   @Override
@@ -139,7 +136,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    System.out.println(tx.getDouble(4.1));
     
    // m_LimeLight.autoAdjust();
   }
