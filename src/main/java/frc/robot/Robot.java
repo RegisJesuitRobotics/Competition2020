@@ -7,14 +7,16 @@
 
 package frc.robot;
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.robot.subsystems.BeltOnly;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.ShootWheels;
+import frc.robot.subsystems.ShootWheels;
+import frc.robot.subsystems.UpAndDown;
+import frc.robot.subsystems.IntakeBar;
 import frc.robot.commands.AutoMove;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -29,7 +31,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends TimedRobot {
   public static OI m_oi;
   public static DriveTrain m_DriveTrain = new DriveTrain();
-  public static Shooter m_Shooter = new Shooter();
+  public static ShootWheels m_Shooter = new ShootWheels();
+  public static BeltOnly m_BeltOnly = new BeltOnly();
+  public static UpAndDown m_UpAndDown = new UpAndDown();
+  public static IntakeBar m_IntakeBar = new IntakeBar();
   
   
 

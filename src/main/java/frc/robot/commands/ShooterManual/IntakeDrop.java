@@ -9,8 +9,8 @@ package frc.robot.commands.ShooterManual;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ShooterIntake extends Command {
-  public ShooterIntake() {
+public class IntakeDrop extends Command {
+  public IntakeDrop() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }

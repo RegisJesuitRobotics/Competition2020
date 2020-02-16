@@ -14,16 +14,15 @@ import frc.robot.Robot;
 public class ShooterShoot extends Command {
   double motorSpeed;
   boolean isIn;
-  public ShooterShoot(double m_motorSpeed, boolean m_isIn) {
-    // Use requires() here to declare subsystem dependencies
+  public ShooterShoot(double m_motorSpeed) {
+   requires(Robot.m_Shooter);
     motorSpeed = m_motorSpeed;
-    isIn = m_isIn;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_Shooter.shootAndIntake(motorSpeed, isIn);
+    Robot.m_Shooter.shootAndIntake(motorSpeed);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -34,18 +33,20 @@ public class ShooterShoot extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    Robot.m_Shooter.shootAndIntake(0, true);
+    
     return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.m_Shooter.shootAndIntake(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    this.end();
   }
 }

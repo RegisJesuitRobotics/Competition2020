@@ -18,32 +18,28 @@ import frc.robot.RobotMap;
 /**
  * Add your docs here.
  */
-public class Shooter extends Subsystem {
+public class BeltOnly extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private TalonSRX ballIntake, belt, shooterWheels;
-  private CANSparkMax aimMotor;
+  private TalonSRX belt;
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    ballIntake = new TalonSRX(RobotMap.INTAKE_PORT);
+    
     belt = new TalonSRX(RobotMap.BELT_PORT);
-    shooterWheels = new TalonSRX(RobotMap.SHOOTER_WHEELS_PORT);
-    aimMotor = new CANSparkMax(200, MotorType.kBrushless);
+    
     
   }
 
-  public void shootAndIntake(double motorSpeed, boolean isShooting){
-    //Assuming shoot is positive
-    motorSpeed = Math.abs(motorSpeed);
-    if(!isShooting){
-      motorSpeed *= -1;
-    }
-    shooterWheels.set(ControlMode.PercentOutput, motorSpeed);
-  }
+  // public void shootAndIntake(double motorSpeed){
+    
+  //   shooterWheelLeft.set(ControlMode.PercentOutput, motorSpeed);
+  //   shooterWheelRight.set(ControlMode.PercentOutput, motorSpeed);
+  //   System.out.println("Shooting/Intaking");
+  // }
 
   // public void DropIntake(double motorSpeed, boolean isDown){
   //   //Assuming down is positive
@@ -54,30 +50,12 @@ public class Shooter extends Subsystem {
   //   intakeDrop.set(ControlMode.PercentOutput,motorSpeed);
   // }
 
-  public void aim(double motorSpeed, boolean isUp){
-    //assuming up is positive
-    motorSpeed = Math.abs(motorSpeed);
-    if(!isUp){
-      motorSpeed *= -1;
-    }
-    aimMotor.set(motorSpeed);
-  }
+ 
 
-  public void belt(double motorSpeed, boolean isIn){
-    //assuming belt moving in is positive
-    motorSpeed = Math.abs(motorSpeed);
-    if(!isIn){
-      motorSpeed *= -1;
-    }
+  public void belt(double motorSpeed){
+   
     belt.set(ControlMode.PercentOutput,motorSpeed);
   }
 
-  public void intake(double motorSpeed, boolean isIn){
-    //assuming in is positive
-    motorSpeed = Math.abs(motorSpeed);
-    if(!isIn){
-      motorSpeed *= -1;
-    }
-    ballIntake.set(ControlMode.PercentOutput,motorSpeed);    
-  }
+  
 }
