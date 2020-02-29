@@ -14,37 +14,18 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
-
-/**
- * Add your docs here.
- */
 public class UpAndDown extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+
   private TalonSRX aimMotor;
 
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-  
+
     aimMotor = new TalonSRX(RobotMap.ADJUST_PORT);
-    
   }
 
- 
+  public void aim(double motorSpeed) {
 
-  // public void DropIntake(double motorSpeed, boolean isDown){
-  //   //Assuming down is positive
-  //   motorSpeed = Math.abs(motorSpeed);
-  //   if(!isDown){
-  //     motorSpeed *= -1;
-  //   }
-  //   intakeDrop.set(ControlMode.PercentOutput,motorSpeed);
-  // }
-
-  public void aim(double motorSpeed){
-    
     aimMotor.set(ControlMode.PercentOutput, motorSpeed);
   }
 

@@ -5,43 +5,42 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.ShooterManual;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-
-public class ShooterShoot extends Command {
-  double motorSpeed;
-  boolean isIn;
-  public ShooterShoot(double m_motorSpeed) {
-   requires(Robot.m_Shooter);
-    motorSpeed = m_motorSpeed;
+public class climberShuffle extends Command {
+  double m_speed;
+  public climberShuffle(double speed) {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+    requires(Robot.m_Climber);
+    m_speed = speed;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_Shooter.shootAndIntake(motorSpeed);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    
+    Robot.m_Climber.sideClimb(m_speed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    
     return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_Shooter.shootAndIntake(0);
+    Robot.m_Climber.sideClimb(0);
   }
 
   // Called when another command which requires one or more of the same

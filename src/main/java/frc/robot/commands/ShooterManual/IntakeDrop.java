@@ -8,11 +8,14 @@
 package frc.robot.commands.ShooterManual;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
 public class IntakeDrop extends Command {
-  public IntakeDrop() {
+  int direction;
+  public IntakeDrop(int m_direction) {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    requires(Robot.m_UpAndDown);
+    direction = m_direction;
   }
 
   // Called just before this Command runs the first time
@@ -23,6 +26,7 @@ public class IntakeDrop extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.m_IntakeBar.intakeMove(direction);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -34,11 +38,13 @@ public class IntakeDrop extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.m_IntakeBar.intakeMove(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    this.end();
   }
 }

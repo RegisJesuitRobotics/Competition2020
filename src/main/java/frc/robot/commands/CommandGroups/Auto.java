@@ -8,36 +8,44 @@
 package frc.robot.commands.CommandGroups;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-
+import frc.robot.Robot;
+import frc.robot.commands.AutoMove;
+import frc.robot.commands.LimelightStuff.LimeLightShooterAlign;
+import frc.robot.commands.ShooterManual.Belt;
+import frc.robot.commands.ShooterManual.IntakeDrop;
+import frc.robot.commands.ShooterManual.ShooterAim;
+import frc.robot.commands.ShooterManual.ShooterShoot;
+import frc.robot.commands.LimelightStuff.LimeLightDriveAlign;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class Auto extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public Auto(int position) {
+  public Auto() {
 
-    //move forward for __ seconds
-    //if position is not 0, Turn (if position is -1, turn left. If position is 1, turn right)
-    //if position is 0, custom program tbd later
-    //Limelight kicks in and lines up to target
-    //shoot all preloaded balls
+    
+    // limelight
+    NetworkTableInstance instance = NetworkTableInstance.getDefault();
+    NetworkTable table = instance.getTable("limelight-limeboi");
+    NetworkTableEntry tv = table.getEntry("tv");
+    boolean TVboolean = tv.getDouble(0.0) == 1;
 
+    // // backwards
+    addSequential(new AutoMove(-.3, 0.3, 1));
+    // // drop intake
+    //addSequential(new IntakeDrop(1));
+    // // thing up
+    addSequential(new ShooterAim(-0.6), 1.5);
+    addSequential(new LimeLightDriveAlign(-1), 1.5);
+    addSequential(new LimeLightShooterAlign(0, 4, 4), 2.5);
+    addParallel(new ShooterShoot(0.7), 5);
+    addSequential(new Belt(0), 2);
+    addSequential(new Belt(-1), 4);
+    addParallel(new ShooterShoot(0), 0.5);
+    addSequential(new AutoMove(0.4, 0.4, 0.6));
 
-    // Add Commands here:
-    // e.g. addSequential(new Command1());
-    // addSequential(new Command2());
-    // these will run in order.
-
-    // To run multiple commands at the same time,
-    // use addParallel()
-    // e.g. addParallel(new Command1());
-    // addSequential(new Command2());
-    // Command1 and Command2 will run in parallel.
-
-    // A command group will require all of the subsystems that each member
-    // would require.
-    // e.g. if Command1 requires chassis, and Command2 requires arm,
-    // a CommandGroup containing them would require both the chassis and the
-    // arm.
   }
 }

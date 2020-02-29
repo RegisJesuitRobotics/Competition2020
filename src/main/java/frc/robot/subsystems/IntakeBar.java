@@ -10,26 +10,36 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
 import frc.robot.RobotMap;
 
-/**
- * Add your docs here.
- */
-
 public class IntakeBar extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
   private TalonSRX intakeBar;
+  private DoubleSolenoid intakeSolenoid;
 
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+
+    intakeSolenoid = new DoubleSolenoid(1, 2);
     intakeBar = new TalonSRX(RobotMap.INTAKE_BAR_PORT);
   }
 
-  public void intakeRun(double motorSpeed){
+  public void intakeRun(double motorSpeed) {
     intakeBar.set(ControlMode.PercentOutput, motorSpeed);
+  }
+
+  public void intakeMove(int direction) {
+    if (direction == -1) {
+      System.out.println("reverse");
+      intakeSolenoid.set(kReverse);
+    } else if (direction == 1) {
+      System.out.println("forward");
+      intakeSolenoid.set(kForward);
+    } else if (direction == 0) {
+      intakeSolenoid.set(kOff);
+
+    }
   }
 }

@@ -9,30 +9,39 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 public class ColorWheel extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
-  private TalonSRX colorWheelMotor;
-
+  
+  private CANSparkMax colorWheelMotor;
+  private DoubleSolenoid spinnerSolenoid;
   @Override
 
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-    TalonSRX motor = new TalonSRX(RobotMap.COLOR_WHEEL_MOTOR_PORT);
+    spinnerSolenoid = new DoubleSolenoid(3, 4);
+    colorWheelMotor = new CANSparkMax(RobotMap.COLOR_WHEEL_MOTOR_PORT, MotorType.kBrushless);
   }
 
-  public void spinMotor(double spinSpeed, boolean isRight) {
-    spinSpeed = Math.abs(spinSpeed);
-
-    if (!isRight) {
-      spinSpeed *= -1;
-    }
+  public void spinMotor(double spinSpeed) {
     
-    colorWheelMotor.set(ControlMode.PercentOutput, spinSpeed);
+    colorWheelMotor.set(spinSpeed);
+  }
+  public void liftSpinner(int direction){
+    if (direction == -1) {
+      System.out.println("down");
+      spinnerSolenoid.set(kReverse);
+    } else if (direction == 1) {
+      System.out.println("up");
+      spinnerSolenoid.set(kForward);
+    } else if (direction == 0) {
+      spinnerSolenoid.set(kOff);
+
+    }
   }
 }

@@ -13,18 +13,10 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LimeLightShooterAlign extends Command {
-  int m_defaultDirection;
-  double m_max;
-  double m_min;
-  public LimeLightShooterAlign(int defaultDirection, double max, double min) {
-    m_defaultDirection = defaultDirection;
-    m_min = min;
-    m_max = max;
-    // Use requires() here to declare subsystem dependencies align
+public class LimeLightShooterAlignClose extends Command {
+  public LimeLightShooterAlignClose() {
+    // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-
-    requires(Robot.m_Shooter);
   }
 
   // Called just before this Command runs the first time
@@ -43,27 +35,17 @@ public class LimeLightShooterAlign extends Command {
     NetworkTableEntry ty = table.getEntry("ty");
     NetworkTableEntry tv = table.getEntry("tv");
     boolean TVboolean = tv.getDouble(0.0) == 1;
-    if(!TVboolean){
-      if(m_defaultDirection == 0){
-        Robot.m_UpAndDown.aim(0);
-      }
-      if(m_defaultDirection == 1){
-        Robot.m_UpAndDown.aim(-0.2);
-      }
-      if(m_defaultDirection == -1){
-        Robot.m_UpAndDown.aim(0.2);
-      }
-    }
+
     if (TVboolean) {
       System.out.println("You have a valid target");
-      if (ty.getDouble(0.0) > -110 - m_min) {
+      if (ty.getDouble(0.0) > -8.1) {
         // go up
         System.out.println("UUUUUUUUUUUP");
-        Robot.m_UpAndDown.aim(-0.2);
-      } else if (ty.getDouble(0.0) < -120 - m_max) {
+        Robot.m_UpAndDown.aim(0.7);
+      } else if (ty.getDouble(0.0) < -10) {
         // go down
         System.out.println("NOT UUUUUUUUUP");
-        Robot.m_UpAndDown.aim(0.2);
+        Robot.m_UpAndDown.aim(-0.7);
       } else {
         System.out.println("stop");
         Robot.m_UpAndDown.aim(0);
@@ -73,25 +55,18 @@ public class LimeLightShooterAlign extends Command {
     }
   }
 
-  // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     return false;
   }
 
-  // Called once after isFinished returns true
   @Override
   protected void end() {
     Robot.m_UpAndDown.aim(0);
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
   @Override
   protected void interrupted() {
     this.end();
   }
-
 }
-
-// -7.8

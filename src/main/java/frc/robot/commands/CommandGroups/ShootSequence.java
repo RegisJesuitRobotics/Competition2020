@@ -5,33 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.CommandGroups;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.ShooterManual.Belt;
+import frc.robot.commands.ShooterManual.ShooterShoot;
 
-public class ColorWheelSpin extends Command {
-  public ColorWheelSpin() {
-
-  }
-
-  @Override
-  protected void initialize() {
-  }
-
-  @Override
-  protected void execute() {
-  }
-
-  @Override
-  protected boolean isFinished() {
-    return false;
-  }
-
-  @Override
-  protected void end() {
-  }
-
-  @Override
-  protected void interrupted() {
+public class ShootSequence extends CommandGroup {
+ 
+  public ShootSequence() {
+    addParallel(new ShooterShoot(0.1));
+    setTimeout(2);
+    addParallel(new Belt(0.5));
+    
   }
 }

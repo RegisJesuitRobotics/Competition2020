@@ -7,7 +7,7 @@ import frc.robot.RobotMap;
 
 public class Drive extends Command {
   public Drive() {
-   requires(Robot.m_DriveTrain);
+    requires(Robot.m_DriveTrain);
   }
 
   @Override
@@ -17,34 +17,33 @@ public class Drive extends Command {
   @Override
   protected void execute() {
 
-  
     double leftSpeed = 1;
     double rightSpeed = 1;
     double leftStickX = Robot.m_oi.GetDriverRawStickAxis(RobotMap.LEFT_STICK_X);
     double LeftTrigger = Robot.m_oi.GetDriverRawTriggerAxis(RobotMap.LEFT_TRIGGER_PORT);
     double RightTrigger = Robot.m_oi.GetDriverRawTriggerAxis(RobotMap.RIGHT_TRIGGER_PORT);
     double Speed = LeftTrigger - RightTrigger;
-		double turn = 2 * leftStickX; 
-		if (leftStickX > RobotMap.DEADZONE) {
+    double turn = 2 * leftStickX;
+    if (leftStickX > RobotMap.DEADZONE) {
 
-			leftSpeed = Speed;
+      leftSpeed = Speed;
       rightSpeed = Speed - (turn * Speed);
-		} else if (leftStickX < -RobotMap.DEADZONE) {
+    } else if (leftStickX < -RobotMap.DEADZONE) {
 
       leftSpeed = Speed + (turn * Speed);
-			rightSpeed = Speed;
-		} else {
+      rightSpeed = Speed;
+    } else {
 
-      
       leftSpeed = Speed;
       rightSpeed = Speed;
     }
-   // System.out.println("Driving");
+    // System.out.println("Driving");
     Robot.m_DriveTrain.setLeftMotorBack(leftSpeed * -RobotMap.LIMITER);
     Robot.m_DriveTrain.setLeftMotorFront(leftSpeed * -RobotMap.LIMITER);
     Robot.m_DriveTrain.setRightMotorBack(rightSpeed * RobotMap.LIMITER);
     Robot.m_DriveTrain.setRightMotorFront(rightSpeed * RobotMap.LIMITER);
   }
+
   @Override
   protected boolean isFinished() {
     return false;
@@ -56,7 +55,7 @@ public class Drive extends Command {
     Robot.m_DriveTrain.setLeftMotorBack(0);
     Robot.m_DriveTrain.setRightMotorBack(0);
     Robot.m_DriveTrain.setLeftMotorFront(0);
-		Robot.m_DriveTrain.setRightMotorFront(0);
+    Robot.m_DriveTrain.setRightMotorFront(0);
   }
 
   // Called when another command which requires one or more of the same
