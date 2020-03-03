@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Climber extends Subsystem {
   DoubleSolenoid climberSolenoid;
-  CANSparkMax climberMotor;
+  CANSparkMax climberMotor, kickMotor;
   TalonSRX climberSide;
 
 
@@ -28,6 +28,7 @@ public class Climber extends Subsystem {
   public void initDefaultCommand() {
     climberSolenoid = new DoubleSolenoid(5, 6);
     climberMotor = new CANSparkMax(420, MotorType.kBrushless);
+    kickMotor = new CANSparkMax(4209, MotorType.kBrushless);
     climberSide = new TalonSRX(69);
   }
 
@@ -37,7 +38,20 @@ public class Climber extends Subsystem {
 
   public void moveClimber(double climberSpeed){
     climberMotor.set(climberSpeed);
+  }
 
+  public void climberUp(double motorSpeed, int direction){
+    kickMotor.set(motorSpeed);
+    if (direction == -1) {
+      System.out.println("reverse");
+      climberSolenoid.set(kReverse);
+    } else if (direction == 1) {
+      System.out.println("forward");
+      climberSolenoid.set(kForward);
+    } else if (direction == 0) {
+      climberSolenoid.set(kOff);
+
+    }
   }
 
   public void setClimberSolenoid(int direction) {

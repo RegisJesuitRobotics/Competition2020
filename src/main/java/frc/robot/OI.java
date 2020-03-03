@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.ClimberDeploy;
 import frc.robot.commands.CommandGroups.Auto;
 import frc.robot.commands.CommandGroups.LimelightCommand;
 import frc.robot.commands.CommandGroups.ShootSequence;
@@ -59,23 +60,26 @@ public class OI {
 
   public OI() {
     //Start Driver controls
-    buttonCircle.whileHeld(new IntakeRun(-1));
-    buttonX.whileHeld(new IntakeRun(1));
+    buttonCircle.whileHeld(new IntakeRun(-0.7));
+    buttonX.whileHeld(new IntakeRun(0.7));
     buttonSquare.whileHeld(new IntakeDrop(1));
     buttonTriangle.whileHeld(new IntakeDrop(-1));
+    buttonOptions.whileHeld(new ClimberDeploy(.30, 1));
+    buttonShare.whileHeld(new ClimberDeploy(-.30, -1));
     //buttonLeftBumper.whileHeld(new Auto());
     //end driver controls
 
     //Start Nicks operator controls
     operatorButtonTriangle.whileHeld(new ShooterAim(-0.7));
     operatorButtonSquare.whileHeld(new ShooterAim(0.7));
-    operatorButtonCircle.whileHeld(new ShooterShoot(-0.3));
-    operatorButtonX.whileHeld(new ShooterShoot(0.5));
+    operatorButtonCircle.whileHeld(new ShooterShoot(-0.3));//sd intakeShoot ORIGINALLY BUTTON CIRCLE
+    operatorButtonX.whileHeld(new ShooterShoot(0.8));//sd secondShoot
     
     operatorButtonLeftBumper.whileHeld(new Belt(1));
     operatorButtonRightBumper.whileHeld(new Belt(-1));
-    operatorRightTrigger.whileHeld(new ShootSequence());
-    operatorLeftTrigger.whileHeld(new LimelightCommand());
+    operatorRightTrigger.whileHeld(new ShooterShoot(0.8));
+    operatorButtonShare.whileHeld(new LimeLightShooterAlign(0, 0));
+    operatorButtonOptions.whileHeld(new LimeLightDriveAlign(0));
     //End Nicks operator controls
   }
 
@@ -96,3 +100,4 @@ public class OI {
   }
 
 }
+//Sd changes needed in OI, ShootSequence, and Auto

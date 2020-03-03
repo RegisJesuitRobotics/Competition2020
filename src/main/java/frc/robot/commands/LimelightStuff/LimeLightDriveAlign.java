@@ -96,33 +96,33 @@ public class LimeLightDriveAlign extends Command {
           if (tx.getDouble(0.0) > 3) {
             // turn right
             System.out.println("right");
-            Robot.m_DriveTrain.setLeftMotorBack(0.1);
-            Robot.m_DriveTrain.setLeftMotorFront(0.1);
-            Robot.m_DriveTrain.setRightMotorBack(0.1);
-            Robot.m_DriveTrain.setRightMotorFront(0.1);
+            Robot.m_DriveTrain.setLeftMotorBack(0.15);
+            Robot.m_DriveTrain.setLeftMotorFront(0.15);
+            Robot.m_DriveTrain.setRightMotorBack(0.15);
+            Robot.m_DriveTrain.setRightMotorFront(0.15);
           } else if (tx.getDouble(0.0) < -3) {
             // turn left
             System.out.println("left");
-            Robot.m_DriveTrain.setLeftMotorBack(-0.1);
-            Robot.m_DriveTrain.setLeftMotorFront(-0.1);
-            Robot.m_DriveTrain.setRightMotorBack(-0.1);
-            Robot.m_DriveTrain.setRightMotorFront(-0.1);
+            Robot.m_DriveTrain.setLeftMotorBack(-0.13);
+            Robot.m_DriveTrain.setLeftMotorFront(-0.13);
+            Robot.m_DriveTrain.setRightMotorBack(-0.13);
+            Robot.m_DriveTrain.setRightMotorFront(-0.13);
           } else if (tx.getDouble(0.0) >= -1.5 && tx.getDouble(0.0) <= 1.5) {
 
             if (tx.getDouble(0.0) > 0.3) {
               // turn right
               System.out.println("right");
-              Robot.m_DriveTrain.setLeftMotorBack(0.05);
-              Robot.m_DriveTrain.setLeftMotorFront(0.05);
-              Robot.m_DriveTrain.setRightMotorBack(0.05);
-              Robot.m_DriveTrain.setRightMotorFront(0.05);
+              Robot.m_DriveTrain.setLeftMotorBack(0.07);
+              Robot.m_DriveTrain.setLeftMotorFront(0.07);
+              Robot.m_DriveTrain.setRightMotorBack(0.07);
+              Robot.m_DriveTrain.setRightMotorFront(0.07);
             } else if (tx.getDouble(0.0) < -0.3) {
               // turn left
               System.out.println("left");
-              Robot.m_DriveTrain.setLeftMotorBack(-0.05);
-              Robot.m_DriveTrain.setLeftMotorFront(-0.05);
-              Robot.m_DriveTrain.setRightMotorBack(-0.05);
-              Robot.m_DriveTrain.setRightMotorFront(-0.05);
+              Robot.m_DriveTrain.setLeftMotorBack(-0.07);
+              Robot.m_DriveTrain.setLeftMotorFront(-0.07);
+              Robot.m_DriveTrain.setRightMotorBack(-0.07);
+              Robot.m_DriveTrain.setRightMotorFront(-0.07);
             }
 
           }

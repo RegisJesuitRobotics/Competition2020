@@ -17,7 +17,7 @@ public class LimelightCommand extends CommandGroup {
    */
   public LimelightCommand() {
     addParallel(new LimeLightDriveAlign(0));
-    addParallel(new LimeLightShooterAlign(0, 0, 0));
+    addParallel(new LimeLightShooterAlign(0, 0));
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());

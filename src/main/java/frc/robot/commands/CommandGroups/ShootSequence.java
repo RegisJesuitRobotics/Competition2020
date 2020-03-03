@@ -14,7 +14,7 @@ import frc.robot.commands.ShooterManual.ShooterShoot;
 public class ShootSequence extends CommandGroup {
  
   public ShootSequence() {
-    addParallel(new ShooterShoot(0.1));
+    addParallel(new ShooterShoot(0.1));//sd sequenceShoot
     setTimeout(2);
     addParallel(new Belt(0.5));
     

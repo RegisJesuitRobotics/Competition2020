@@ -8,25 +8,27 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-public class climberShuffle extends Command {
-  double m_speed;
-  public climberShuffle(double speed) {
+public class ClimberDeploy extends Command {
+  double motorSpeed;
+  int direction;
+  public ClimberDeploy(double m_motorSpeed, int m_direction) {
+    motorSpeed = m_motorSpeed;
+    direction = m_direction;
     requires(Robot.m_Climber);
-    m_speed = speed;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.m_Climber.climberUp(motorSpeed, direction);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_Climber.sideClimb(m_speed);
+    Robot.m_Climber.climberUp(motorSpeed, direction);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -38,7 +40,7 @@ public class climberShuffle extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_Climber.sideClimb(0);
+    Robot.m_Climber.climberUp(0, 0);
   }
 
   // Called when another command which requires one or more of the same

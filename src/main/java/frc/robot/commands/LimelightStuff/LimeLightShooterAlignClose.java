@@ -38,11 +38,11 @@ public class LimeLightShooterAlignClose extends Command {
 
     if (TVboolean) {
       System.out.println("You have a valid target");
-      if (ty.getDouble(0.0) > -8.1) {
+      if (ty.getDouble(0.0) > -8.5) {
         // go up
         System.out.println("UUUUUUUUUUUP");
         Robot.m_UpAndDown.aim(0.7);
-      } else if (ty.getDouble(0.0) < -10) {
+      } else if (ty.getDouble(0.0) < -9.5) {
         // go down
         System.out.println("NOT UUUUUUUUUP");
         Robot.m_UpAndDown.aim(-0.7);

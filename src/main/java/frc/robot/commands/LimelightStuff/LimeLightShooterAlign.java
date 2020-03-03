@@ -16,10 +16,8 @@ import frc.robot.Robot;
 public class LimeLightShooterAlign extends Command {
   int m_defaultDirection;
   double m_max;
-  double m_min;
-  public LimeLightShooterAlign(int defaultDirection, double max, double min) {
+  public LimeLightShooterAlign(int defaultDirection, double max) {
     m_defaultDirection = defaultDirection;
-    m_min = min;
     m_max = max;
     // Use requires() here to declare subsystem dependencies align
     // eg. requires(chassis);
@@ -56,11 +54,11 @@ public class LimeLightShooterAlign extends Command {
     }
     if (TVboolean) {
       System.out.println("You have a valid target");
-      if (ty.getDouble(0.0) > -11 - m_min) {
+      if (ty.getDouble(0.0) > -9.5 - m_max) {
         // go up
         System.out.println("UUUUUUUUUUUP");
-        Robot.m_UpAndDown.aim(-0.2);
-      } else if (ty.getDouble(0.0) < -12 - m_max) {
+        Robot.m_UpAndDown.aim(-0.5);
+      } else if (ty.getDouble(0.0) < -10.5 - m_max) {
         // go down
         System.out.println("NOT UUUUUUUUUP");
         Robot.m_UpAndDown.aim(0.2);

@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
 import frc.robot.commands.AutoMove;
 import frc.robot.commands.LimelightStuff.LimeLightShooterAlign;
+import frc.robot.commands.LimelightStuff.LimeLightShooterAlignClose;
 import frc.robot.commands.ShooterManual.Belt;
 import frc.robot.commands.ShooterManual.IntakeDrop;
 import frc.robot.commands.ShooterManual.ShooterAim;
@@ -39,9 +40,9 @@ public class Auto extends CommandGroup {
     //addSequential(new IntakeDrop(1));
     // // thing up
     addSequential(new ShooterAim(-0.6), 1.5);
-    addSequential(new LimeLightDriveAlign(-1), 1.5);
-    addSequential(new LimeLightShooterAlign(0, 4, 4), 2.5);
-    addParallel(new ShooterShoot(0.7), 5);
+    addSequential(new LimeLightDriveAlign(-1), 2.25);
+    addSequential(new LimeLightShooterAlign(0,1), 2.5);
+    addParallel(new ShooterShoot(0.7), 6); //sd autoShoot
     addSequential(new Belt(0), 2);
     addSequential(new Belt(-1), 4);
     addParallel(new ShooterShoot(0), 0.5);
