@@ -34,7 +34,7 @@ public class ShootWheels extends Subsystem {
 
     shooterWheelLeft.set(ControlMode.PercentOutput, motorSpeed);
     shooterWheelRight.set(ControlMode.PercentOutput, -motorSpeed);
-    System.out.println("Shooting/Intaking");
+  //  System.out.println("Shooting/Intaking");
   }
 
 }

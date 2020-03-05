@@ -72,14 +72,15 @@ public class OI {
     //Start Nicks operator controls
     operatorButtonTriangle.whileHeld(new ShooterAim(-0.7));
     operatorButtonSquare.whileHeld(new ShooterAim(0.7));
-    operatorButtonCircle.whileHeld(new ShooterShoot(-0.3));//sd intakeShoot ORIGINALLY BUTTON CIRCLE
-    operatorButtonX.whileHeld(new ShooterShoot(0.8));//sd secondShoot
+    operatorButtonCircle.whileHeld(new ShooterShoot(-0.3));
+    operatorButtonX.whileHeld(new ShooterShoot(0.8));
     
     operatorButtonLeftBumper.whileHeld(new Belt(1));
     operatorButtonRightBumper.whileHeld(new Belt(-1));
     operatorRightTrigger.whileHeld(new ShooterShoot(0.8));
-    operatorButtonShare.whileHeld(new LimeLightShooterAlign(0, 0));
+    operatorButtonShare.whileHeld(new LimeLightShooterAlign(1, 0));
     operatorButtonOptions.whileHeld(new LimeLightDriveAlign(0));
+    operatorLeftTrigger.whileHeld(new ShooterShoot(0.95));
     //End Nicks operator controls
   }
 

@@ -34,10 +34,10 @@ public class ColorWheel extends Subsystem {
   }
   public void liftSpinner(int direction){
     if (direction == -1) {
-      System.out.println("down");
+    //  System.out.println("down");
       spinnerSolenoid.set(kReverse);
     } else if (direction == 1) {
-      System.out.println("up");
+    //  System.out.println("up");
       spinnerSolenoid.set(kForward);
     } else if (direction == 0) {
       spinnerSolenoid.set(kOff);

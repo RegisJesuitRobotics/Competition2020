@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -19,6 +20,7 @@ import frc.robot.subsystems.ShootWheels;
 import frc.robot.subsystems.UpAndDown;
 import frc.robot.subsystems.IntakeBar;
 import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.ColorWheel;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
@@ -33,7 +35,7 @@ public class Robot extends TimedRobot {
   public static UpAndDown m_UpAndDown = new UpAndDown();
   public static IntakeBar m_IntakeBar = new IntakeBar();
   public static Climber m_Climber = new Climber();
-
+  public static ColorWheel m_ColorWheel = new ColorWheel();
   // read values periodically
   NetworkTableInstance instance = NetworkTableInstance.getDefault();
   NetworkTable table = instance.getTable("limelight-limeboi");
@@ -46,6 +48,7 @@ public class Robot extends TimedRobot {
   Command m_autonomousCommand;
   double TX = tx.getDouble(0.0);
   double TY = ty.getDouble(0.0);
+  PowerDistributionPanel PDP;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   @Override
@@ -53,6 +56,8 @@ public class Robot extends TimedRobot {
     m_autonomousCommand = new Auto();
     m_oi = new OI();
 
+    PDP = new PowerDistributionPanel();
+    
     SmartDashboard.putData("Auto mode", m_chooser);
 
     SmartDashboard.putData("Auto mode", m_chooser);
@@ -98,6 +103,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("TY", TY);
     SmartDashboard.putNumber("TX", TX);
     SmartDashboard.putBoolean("Valid Target?", TVboolean);
+    System.out.println("TOTAL CURRENT: " + PDP.getTotalCurrent());
 
   }
 

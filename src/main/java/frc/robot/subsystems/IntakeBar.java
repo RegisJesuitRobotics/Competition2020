@@ -32,10 +32,10 @@ public class IntakeBar extends Subsystem {
 
   public void intakeMove(int direction) {
     if (direction == -1) {
-      System.out.println("reverse");
+    //  System.out.println("reverse");
       intakeSolenoid.set(kReverse);
     } else if (direction == 1) {
-      System.out.println("forward");
+    //  System.out.println("forward");
       intakeSolenoid.set(kForward);
     } else if (direction == 0) {
       intakeSolenoid.set(kOff);

@@ -43,10 +43,10 @@ public class Climber extends Subsystem {
   public void climberUp(double motorSpeed, int direction){
     kickMotor.set(motorSpeed);
     if (direction == -1) {
-      System.out.println("reverse");
+      //System.out.println("reverse");
       climberSolenoid.set(kReverse);
     } else if (direction == 1) {
-      System.out.println("forward");
+      //System.out.println("forward");
       climberSolenoid.set(kForward);
     } else if (direction == 0) {
       climberSolenoid.set(kOff);
@@ -59,17 +59,17 @@ public class Climber extends Subsystem {
 
       if (direction == 1) {
         climberSolenoid.set(kForward);
-        System.out.println("up");
+       // System.out.println("up");
 
       }
 
       else if (direction == -1) {
         climberSolenoid.set(kReverse);
-        System.out.println("down");
+       // System.out.println("down");
 
       } else if (direction == 0) {
         climberSolenoid.set(kOff);
-        System.out.println("off");
+       // System.out.println("off");
 
       }
     }

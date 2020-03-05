@@ -5,13 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.ColorWheelStuff;
 
+import edu.wpi.first.wpilibj.Relay.Direction;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
 public class ColorWheelSpin extends Command {
-  public ColorWheelSpin() {
+  double m_spinSpeed;
 
+  public ColorWheelSpin(double spinSpeed) {
+    m_spinSpeed = spinSpeed;
+    requires(Robot.m_ColorWheel);
   }
 
   @Override
@@ -20,6 +25,7 @@ public class ColorWheelSpin extends Command {
 
   @Override
   protected void execute() {
+  Robot.m_ColorWheel.spinMotor(m_spinSpeed);
   }
 
   @Override
@@ -29,9 +35,11 @@ public class ColorWheelSpin extends Command {
 
   @Override
   protected void end() {
+  Robot.m_ColorWheel.spinMotor(0);
   }
 
   @Override
   protected void interrupted() {
+  this.end();
   }
 }
