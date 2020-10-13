@@ -36,11 +36,10 @@ public class RobotMap {
   public static final double LIMITER = 0.8;
 
   // shooter ports
-  public static final int INTAKE_PORT = 5;
   public static final int BELT_PORT = 11;
   public static final int SHOOTER_WHEELS_PORT_LEFT = 13;
   public static final int SHOOTER_WHEELS_PORT_RIGHT = 2;
-  public static final int ADJUST_PORT = 12;
+  public static final int ADJUST_PORT = 10;
 
   // color wheel ports
   public static final int COLOR_WHEEL_MOTOR_PORT = 0;
@@ -48,8 +47,8 @@ public class RobotMap {
   // drive train ports
   public static final int LEFT_BACK_PORT = 15;
   public static final int LEFT_FRONT_PORT = 14;
-  public static final int RIGHT_BACK_PORT = 1;
-  public static final int RIGHT_FRONT_PORT = 0;
+  public static final int RIGHT_BACK_PORT = 0;
+  public static final int RIGHT_FRONT_PORT = 1;
   public static final int INTAKE_DROP_PORT = 42069;
   public static final int INTAKE_BAR_PORT = 5;
 

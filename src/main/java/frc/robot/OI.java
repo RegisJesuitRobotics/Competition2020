@@ -31,8 +31,8 @@ public class OI {
   Button buttonX = new JoystickButton(driverController, 2);
   Button buttonSquare = new JoystickButton(driverController, 1);
   Button buttonTriangle = new JoystickButton(driverController, 4);
-  Button buttonLeftBumper = new JoystickButton(driverController, 5);
-  Button buttonRightBumper = new JoystickButton(driverController, 6);
+  Button buttonLeftBumper = new JoystickButton(driverController, 7);
+  Button buttonRightBumper = new JoystickButton(driverController, 8);
   Button touchPad = new JoystickButton(driverController, 14);
   Button buttonOptions = new JoystickButton(driverController, 10);
   Button buttonShare = new JoystickButton(driverController, 9);

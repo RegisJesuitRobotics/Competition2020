@@ -103,7 +103,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("TY", TY);
     SmartDashboard.putNumber("TX", TX);
     SmartDashboard.putBoolean("Valid Target?", TVboolean);
-    System.out.println("TOTAL CURRENT: " + PDP.getTotalCurrent());
+    // System.out.println("TOTAL CURRENT: " + PDP.getTotalCurrent());
 
   }
 
