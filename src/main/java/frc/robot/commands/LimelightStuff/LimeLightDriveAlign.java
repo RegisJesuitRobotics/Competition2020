@@ -11,11 +11,13 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Enums;
 import frc.robot.Robot;
+import frc.robot.Enums.DirectionEnum;
 
 public class LimeLightDriveAlign extends Command {
-  int m_defaultDirection;
-  public LimeLightDriveAlign(int defaultDirection) {
+  Enums.DirectionEnum m_defaultDirection;
+  public LimeLightDriveAlign(Enums.DirectionEnum defaultDirection) {
     m_defaultDirection = defaultDirection;
     // Use requires() here to declare subsystem dependencies align
     // eg. requires(chassis);
@@ -39,19 +41,19 @@ public class LimeLightDriveAlign extends Command {
     NetworkTableEntry tv = table.getEntry("tv");
     boolean TVboolean = tv.getDouble(0.0) == 1;
     if (!TVboolean) {
-      if(m_defaultDirection == 0){
+      if(m_defaultDirection == DirectionEnum.STOP){
         Robot.m_DriveTrain.setLeftMotorBack(0);
         Robot.m_DriveTrain.setLeftMotorFront(0);
         Robot.m_DriveTrain.setRightMotorBack(0);
         Robot.m_DriveTrain.setRightMotorFront(0);
       }
-      if(m_defaultDirection == -1){
+      if(m_defaultDirection == DirectionEnum.LEFT){
         Robot.m_DriveTrain.setLeftMotorBack(0.3);
         Robot.m_DriveTrain.setLeftMotorFront(0.3);
         Robot.m_DriveTrain.setRightMotorBack(0.3);
         Robot.m_DriveTrain.setRightMotorFront(0.3);
       }
-      if(m_defaultDirection == 1){
+      if(m_defaultDirection == DirectionEnum.RIGHT){
         Robot.m_DriveTrain.setLeftMotorBack(-0.3);
         Robot.m_DriveTrain.setLeftMotorFront(-0.3);
         Robot.m_DriveTrain.setRightMotorBack(-0.3);

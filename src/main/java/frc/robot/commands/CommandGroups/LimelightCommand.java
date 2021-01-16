@@ -8,6 +8,7 @@
 package frc.robot.commands.CommandGroups;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.Enums.DirectionEnum;
 import frc.robot.commands.LimelightStuff.LimeLightDriveAlign;
 import frc.robot.commands.LimelightStuff.LimeLightShooterAlign;
 
@@ -16,7 +17,7 @@ public class LimelightCommand extends CommandGroup {
    * Add your docs here.
    */
   public LimelightCommand() {
-    addParallel(new LimeLightDriveAlign(0));
+    addParallel(new LimeLightDriveAlign(DirectionEnum.STOP));
     addParallel(new LimeLightShooterAlign(0, 0));
     // Add Commands here:
     // e.g. addSequential(new Command1());

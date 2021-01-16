@@ -9,6 +9,7 @@ package frc.robot.commands.CommandGroups;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
+import frc.robot.Enums.DirectionEnum;
 import frc.robot.commands.AutoMove;
 import frc.robot.commands.LimelightStuff.LimeLightShooterAlign;
 import frc.robot.commands.LimelightStuff.LimeLightShooterAlignClose;
@@ -35,18 +36,18 @@ public class Auto extends CommandGroup {
     boolean TVboolean = tv.getDouble(0.0) == 1;
 
     // // backwards
-    addSequential(new AutoMove(-.3, 0.3, 1));
+    addSequential(new AutoMove(-0.3, -0.3, 0.3, 0.3, 1));
     // // drop intake
     //addSequential(new IntakeDrop(1));
     // // thing up
     addSequential(new ShooterAim(-0.6), 1.5);
-    addSequential(new LimeLightDriveAlign(-1), 2.25);
+    addSequential(new LimeLightDriveAlign(DirectionEnum.LEFT), 2.25);
     addSequential(new LimeLightShooterAlign(0,1), 2.5);
     addParallel(new ShooterShoot(0.7), 6); //sd autoShoot
     addSequential(new Belt(0), 2);
     addSequential(new Belt(-1), 4);
     addParallel(new ShooterShoot(0), 0.5);
-    addSequential(new AutoMove(0.4, 0.4, 0.6));
+    addSequential(new AutoMove(0.4, 0.4, 0.4, 0.4, 0.6));
 
   }
 }

@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.Enums.DirectionEnum;
 import frc.robot.commands.ClimberDeploy;
 import frc.robot.commands.CommandGroups.Auto;
 import frc.robot.commands.CommandGroups.LimelightCommand;
@@ -51,7 +52,7 @@ public class OI {
   Button operatorBouchPad = new JoystickButton(operatorController, 14);
   Button operatorButtonOptions = new JoystickButton(operatorController, 10);
   Button operatorButtonShare = new JoystickButton(operatorController, 9);
-  Button operatorDPadUp = new JoystickButton(operatorController, 0);
+  // Button operatorDPadUp = new JoystickButton(operatorController, 0);
   Button operatorDPadRight = new JoystickButton(operatorController, 90);
   Button operatorDPadDown = new JoystickButton(operatorController, 180);
   Button operatorDPadLeft = new JoystickButton(operatorController, 270);
@@ -79,7 +80,7 @@ public class OI {
     operatorButtonRightBumper.whileHeld(new Belt(-1));
     operatorRightTrigger.whileHeld(new ShooterShoot(0.8));
     operatorButtonShare.whileHeld(new LimeLightShooterAlign(1, 0));
-    operatorButtonOptions.whileHeld(new LimeLightDriveAlign(0));
+    operatorButtonOptions.whileHeld(new LimeLightDriveAlign(DirectionEnum.STOP));
     operatorLeftTrigger.whileHeld(new ShooterShoot(0.95));
     //End Nicks operator controls
   }
