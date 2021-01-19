@@ -8,19 +8,16 @@
 package frc.robot.commands.CommandGroups;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.Robot;
 import frc.robot.Enums.DirectionEnum;
 import frc.robot.commands.AutoMove;
 import frc.robot.commands.LimelightStuff.LimeLightShooterAlign;
-import frc.robot.commands.LimelightStuff.LimeLightShooterAlignClose;
 import frc.robot.commands.ShooterManual.Belt;
-import frc.robot.commands.ShooterManual.IntakeDrop;
 import frc.robot.commands.ShooterManual.ShooterAim;
 import frc.robot.commands.ShooterManual.ShooterShoot;
 import frc.robot.commands.LimelightStuff.LimeLightDriveAlign;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
+// import edu.wpi.first.networktables.NetworkTable;
+// import edu.wpi.first.networktables.NetworkTableEntry;
+// import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class Auto extends CommandGroup {
   /**
@@ -30,10 +27,10 @@ public class Auto extends CommandGroup {
 
     
     // limelight
-    NetworkTableInstance instance = NetworkTableInstance.getDefault();
-    NetworkTable table = instance.getTable("limelight-limeboi");
-    NetworkTableEntry tv = table.getEntry("tv");
-    boolean TVboolean = tv.getDouble(0.0) == 1;
+    // NetworkTableInstance instance = NetworkTableInstance.getDefault();
+    // NetworkTable table = instance.getTable("limelight-limeboi");
+    // NetworkTableEntry tv = table.getEntry("tv");
+    // boolean TVboolean = tv.getDouble(0.0) == 1;
 
     // // backwards
     addSequential(new AutoMove(-0.3, -0.3, 0.3, 0.3, 1));

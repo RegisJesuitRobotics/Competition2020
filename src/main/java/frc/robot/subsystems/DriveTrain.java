@@ -22,6 +22,13 @@ public class DriveTrain extends Subsystem {
 
   }
 
+  public void setAll(double allSpeed) {
+    setLeftMotorBack(allSpeed);
+    setLeftMotorFront(allSpeed);
+    setRightMotorBack(allSpeed);
+    setRightMotorFront(allSpeed);
+  }
+
   public void setLeftMotorBack(double leftBackSpeed) {
     leftBack.set(ControlMode.PercentOutput, leftBackSpeed);
   }

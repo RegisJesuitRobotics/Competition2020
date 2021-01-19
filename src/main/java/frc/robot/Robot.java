@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.commands.CommandGroups.Auto;
-import frc.robot.commands.CommandGroups.ShootSequence;
 import frc.robot.subsystems.BeltOnly;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ShootWheels;

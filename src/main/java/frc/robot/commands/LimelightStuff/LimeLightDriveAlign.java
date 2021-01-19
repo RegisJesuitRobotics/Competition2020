@@ -17,6 +17,7 @@ import frc.robot.Enums.DirectionEnum;
 
 public class LimeLightDriveAlign extends Command {
   Enums.DirectionEnum m_defaultDirection;
+
   public LimeLightDriveAlign(Enums.DirectionEnum defaultDirection) {
     m_defaultDirection = defaultDirection;
     // Use requires() here to declare subsystem dependencies align
@@ -35,108 +36,72 @@ public class LimeLightDriveAlign extends Command {
   protected void execute() {
     NetworkTableInstance instance = NetworkTableInstance.getDefault();
     NetworkTable table = instance.getTable("limelight-limeboi");
-    NetworkTable fms = instance.getTable("FMSInfo");
-    NetworkTableEntry g = fms.getEntry("StationNumber");
+    // NetworkTable fms = instance.getTable("FMSInfo");
+    // NetworkTableEntry g = fms.getEntry("StationNumber");
     NetworkTableEntry tx = table.getEntry("tx");
     NetworkTableEntry tv = table.getEntry("tv");
     boolean TVboolean = tv.getDouble(0.0) == 1;
     if (!TVboolean) {
-      if(m_defaultDirection == DirectionEnum.STOP){
-        Robot.m_DriveTrain.setLeftMotorBack(0);
-        Robot.m_DriveTrain.setLeftMotorFront(0);
-        Robot.m_DriveTrain.setRightMotorBack(0);
-        Robot.m_DriveTrain.setRightMotorFront(0);
+      if (m_defaultDirection == DirectionEnum.STOP) {
+        Robot.m_DriveTrain.setAll(0.0);
       }
-      if(m_defaultDirection == DirectionEnum.LEFT){
-        Robot.m_DriveTrain.setLeftMotorBack(0.3);
-        Robot.m_DriveTrain.setLeftMotorFront(0.3);
-        Robot.m_DriveTrain.setRightMotorBack(0.3);
-        Robot.m_DriveTrain.setRightMotorFront(0.3);
+      if (m_defaultDirection == DirectionEnum.LEFT) {
+        Robot.m_DriveTrain.setAll(0.3);
       }
-      if(m_defaultDirection == DirectionEnum.RIGHT){
-        Robot.m_DriveTrain.setLeftMotorBack(-0.3);
-        Robot.m_DriveTrain.setLeftMotorFront(-0.3);
-        Robot.m_DriveTrain.setRightMotorBack(-0.3);
-        Robot.m_DriveTrain.setRightMotorFront(-0.3);
+      if (m_defaultDirection == DirectionEnum.RIGHT) {
+        Robot.m_DriveTrain.setAll(-0.3);
       }
       System.out.println("You do not hava a valid target");
-    }
-    else if (TVboolean) {
+    } else if (TVboolean) {
       System.out.println("You have a valid target");
       if (tx.getDouble(0.0) > 10) {
         // turn right
         // System.out.println("right0 " + tx);
-        Robot.m_DriveTrain.setLeftMotorBack(0.3);
-        Robot.m_DriveTrain.setLeftMotorFront(0.3);
-        Robot.m_DriveTrain.setRightMotorBack(0.3);
-        Robot.m_DriveTrain.setRightMotorFront(0.3);
+        Robot.m_DriveTrain.setAll(0.3);
       } else if (tx.getDouble(0.0) < -10) {
         // turn left
         // System.out.println("left0 "+ tx);
-        Robot.m_DriveTrain.setLeftMotorBack(-0.3);
-        Robot.m_DriveTrain.setLeftMotorFront(-0.3);
-        Robot.m_DriveTrain.setRightMotorBack(-0.3);
-        Robot.m_DriveTrain.setRightMotorFront(-0.3);
+        Robot.m_DriveTrain.setAll(-0.3);
+
       } else if (tx.getDouble(0.0) >= -10 && tx.getDouble(0.0) <= 10) {
 
         if (tx.getDouble(0.0) > 5) {
           // turn right
           // System.out.println("right1 "+ tx);
-          Robot.m_DriveTrain.setLeftMotorBack(0.15);
-          Robot.m_DriveTrain.setLeftMotorFront(0.15);
-          Robot.m_DriveTrain.setRightMotorBack(0.15);
-          Robot.m_DriveTrain.setRightMotorFront(0.15);
+          Robot.m_DriveTrain.setAll(0.15);
         } else if (tx.getDouble(0.0) < -5) {
           // turn left
           // System.out.println("left1 "+ tx);
-          Robot.m_DriveTrain.setLeftMotorBack(-0.15);
-          Robot.m_DriveTrain.setLeftMotorFront(-0.15);
-          Robot.m_DriveTrain.setRightMotorBack(-0.15);
-          Robot.m_DriveTrain.setRightMotorFront(-0.15);
+          Robot.m_DriveTrain.setAll(-0.15);
         } else if (tx.getDouble(0.0) >= -5 && tx.getDouble(0.0) <= 5) {
 
           if (tx.getDouble(0.0) > 3) {
             // turn right
             System.out.println("right");
-            Robot.m_DriveTrain.setLeftMotorBack(0.15);
-            Robot.m_DriveTrain.setLeftMotorFront(0.15);
-            Robot.m_DriveTrain.setRightMotorBack(0.15);
-            Robot.m_DriveTrain.setRightMotorFront(0.15);
+            Robot.m_DriveTrain.setAll(0.15);
           } else if (tx.getDouble(0.0) < -3) {
             // turn left
             System.out.println("left");
-            Robot.m_DriveTrain.setLeftMotorBack(-0.13);
-            Robot.m_DriveTrain.setLeftMotorFront(-0.13);
-            Robot.m_DriveTrain.setRightMotorBack(-0.13);
-            Robot.m_DriveTrain.setRightMotorFront(-0.13);
+            Robot.m_DriveTrain.setAll(-0.13);
           } else if (tx.getDouble(0.0) >= -1.5 && tx.getDouble(0.0) <= 1.5) {
 
             if (tx.getDouble(0.0) > 0.3) {
               // turn right
               System.out.println("right");
-              Robot.m_DriveTrain.setLeftMotorBack(0.07);
-              Robot.m_DriveTrain.setLeftMotorFront(0.07);
-              Robot.m_DriveTrain.setRightMotorBack(0.07);
-              Robot.m_DriveTrain.setRightMotorFront(0.07);
+              Robot.m_DriveTrain.setAll(0.07);
             } else if (tx.getDouble(0.0) < -0.3) {
               // turn left
               System.out.println("left");
-              Robot.m_DriveTrain.setLeftMotorBack(-0.07);
-              Robot.m_DriveTrain.setLeftMotorFront(-0.07);
-              Robot.m_DriveTrain.setRightMotorBack(-0.07);
-              Robot.m_DriveTrain.setRightMotorFront(-0.07);
+              Robot.m_DriveTrain.setAll(-0.07);
             }
 
           }
 
         } else {
           System.out.println("stop");
-          Robot.m_DriveTrain.setLeftMotorBack(0.0);
-          Robot.m_DriveTrain.setLeftMotorFront(0.0);
-          Robot.m_DriveTrain.setRightMotorBack(0.0);
-          Robot.m_DriveTrain.setRightMotorFront(0.0);
+          Robot.m_DriveTrain.setAll(0.0);
         }
-      } 
+      }
     }
   }
 

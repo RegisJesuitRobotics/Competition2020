@@ -29,9 +29,9 @@ public class LimeLightShooterAlignClose extends Command {
   protected void execute() {
     NetworkTableInstance instance = NetworkTableInstance.getDefault();
     NetworkTable table = instance.getTable("limelight-limeboi");
-    NetworkTable fms = instance.getTable("FMSInfo");
-    NetworkTableEntry g = fms.getEntry("StationNumber");
-    NetworkTableEntry tx = table.getEntry("tx");
+    // NetworkTable fms = instance.getTable("FMSInfo");
+    // NetworkTableEntry g = fms.getEntry("StationNumber");
+    // NetworkTableEntry tx = table.getEntry("tx");
     NetworkTableEntry ty = table.getEntry("ty");
     NetworkTableEntry tv = table.getEntry("tv");
     boolean TVboolean = tv.getDouble(0.0) == 1;

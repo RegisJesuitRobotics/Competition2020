@@ -8,7 +8,6 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.revrobotics.CANSparkMax;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -20,8 +19,7 @@ public class ShootWheels extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private TalonSRX ballIntake, belt, shooterWheelLeft, shooterWheelRight;
-  private CANSparkMax aimMotor;
+  private TalonSRX shooterWheelLeft, shooterWheelRight;
 
   @Override
   public void initDefaultCommand() {
