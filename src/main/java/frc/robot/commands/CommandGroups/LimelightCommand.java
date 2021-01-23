@@ -17,6 +17,6 @@ public class LimelightCommand extends ParallelCommandGroup {
    * Add your docs here.
    */
   public LimelightCommand() {
-    addCommands(new LimeLightDriveAlign(DirectionEnum.STOP), new LimeLightShooterAlign(0, 0));
+    super(new LimeLightDriveAlign(DirectionEnum.STOP), new LimeLightShooterAlign(0, 0));
   }
 }

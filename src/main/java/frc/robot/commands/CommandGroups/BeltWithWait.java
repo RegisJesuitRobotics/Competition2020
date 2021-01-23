@@ -6,7 +6,6 @@ import frc.robot.commands.ShooterManual.Belt;
 
 class BeltWithWait extends SequentialCommandGroup {
     public BeltWithWait(double seconds, double m_motorSpeed) {
-        addCommands(new WaitCommand(seconds));
-        addCommands(new Belt(m_motorSpeed));
+        super(new WaitCommand(seconds), new Belt(m_motorSpeed));
     }
 }

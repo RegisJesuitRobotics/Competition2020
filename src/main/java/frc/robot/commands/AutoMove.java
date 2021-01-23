@@ -42,10 +42,7 @@ public class AutoMove extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    Robot.m_DriveTrain.setLeftMotorBack(0);
-    Robot.m_DriveTrain.setLeftMotorFront(0);
-    Robot.m_DriveTrain.setRightMotorBack(0);
-    Robot.m_DriveTrain.setRightMotorFront(0);
+    Robot.m_DriveTrain.setAll(0);
   }
 
 }

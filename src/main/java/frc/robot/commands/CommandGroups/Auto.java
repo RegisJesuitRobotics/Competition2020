@@ -30,7 +30,7 @@ public class Auto extends SequentialCommandGroup {
     // boolean TVboolean = tv.getDouble(0.0) == 1;
 
     // // backwards
-    addCommands(
+    super(
       new AutoMove(-0.3, -0.3, 0.3, 0.3).withTimeout(1),
       new ShooterAim(-0.6).withTimeout(1.5),
       new LimeLightDriveAlign(DirectionEnum.LEFT).withTimeout(2.25),
