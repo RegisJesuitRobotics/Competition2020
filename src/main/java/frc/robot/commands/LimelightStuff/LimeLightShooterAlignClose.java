@@ -10,10 +10,10 @@ package frc.robot.commands.LimelightStuff;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class LimeLightShooterAlignClose extends Command {
+public class LimeLightShooterAlignClose extends CommandBase {
   public LimeLightShooterAlignClose() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -21,12 +21,12 @@ public class LimeLightShooterAlignClose extends Command {
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  public void initialize() {
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
+  public void execute() {
     NetworkTableInstance instance = NetworkTableInstance.getDefault();
     NetworkTable table = instance.getTable("limelight-limeboi");
     // NetworkTable fms = instance.getTable("FMSInfo");
@@ -56,17 +56,13 @@ public class LimeLightShooterAlignClose extends Command {
   }
 
   @Override
-  protected boolean isFinished() {
+  public boolean isFinished() {
     return false;
   }
 
   @Override
-  protected void end() {
+  public void end(boolean interrupted) {
     Robot.m_UpAndDown.aim(0);
   }
 
-  @Override
-  protected void interrupted() {
-    this.end();
-  }
 }

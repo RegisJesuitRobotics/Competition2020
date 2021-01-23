@@ -7,47 +7,41 @@
 
 package frc.robot.commands.ShooterManual;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
 
-public class ShooterShoot extends Command {
+public class ShooterShoot extends CommandBase {
   double motorSpeed;
   boolean isIn;
   public ShooterShoot(double m_motorSpeed) {
-   requires(Robot.m_Shooter);
+   addRequirements(Robot.m_Shooter);
     motorSpeed = m_motorSpeed;
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  public void initialize() {
     Robot.m_Shooter.shootAndIntake(motorSpeed);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
+  public void execute() {
     
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
+  public boolean isFinished() {
     
     return false;
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end() {
+  public void end(boolean interrupted) {
     Robot.m_Shooter.shootAndIntake(0);
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-    this.end();
-  }
 }

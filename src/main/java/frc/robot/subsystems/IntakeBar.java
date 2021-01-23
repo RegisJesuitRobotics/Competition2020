@@ -11,20 +11,14 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
 import frc.robot.RobotMap;
 
-public class IntakeBar extends Subsystem {
-  private TalonSRX intakeBar;
-  private DoubleSolenoid intakeSolenoid;
-
-  @Override
-  public void initDefaultCommand() {
-
-    intakeSolenoid = new DoubleSolenoid(1, 2);
-    intakeBar = new TalonSRX(RobotMap.INTAKE_BAR_PORT);
-  }
+public class IntakeBar extends SubsystemBase {
+  private TalonSRX intakeBar = new TalonSRX(RobotMap.INTAKE_BAR_PORT);
+  private DoubleSolenoid intakeSolenoid = new DoubleSolenoid(1, 2);
 
   public void intakeRun(double motorSpeed) {
     intakeBar.set(ControlMode.PercentOutput, motorSpeed);

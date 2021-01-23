@@ -9,18 +9,12 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 
-public class UpAndDown extends Subsystem {
+public class UpAndDown extends SubsystemBase {
 
-  private TalonSRX aimMotor;
-
-  @Override
-  public void initDefaultCommand() {
-
-    aimMotor = new TalonSRX(RobotMap.ADJUST_PORT);
-  }
+  private TalonSRX aimMotor = new TalonSRX(RobotMap.ADJUST_PORT);
 
   public void aim(double motorSpeed) {
 

@@ -8,30 +8,30 @@
 package frc.robot.commands.ShooterManual;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class BeltAssist extends Command {
+public class BeltAssist extends CommandBase {
   double motorSpeed;
   private DigitalInput photoSensor;
   public BeltAssist(double m_motorSpeed) {
     // Use requires() here to declare subsystem dependencies
     motorSpeed = m_motorSpeed;
-    requires(Robot.m_BeltOnly);
+    addRequirements(Robot.m_BeltOnly);
     photoSensor = new DigitalInput(4);
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  public void initialize() {
     Robot.m_BeltOnly.belt(motorSpeed);
     System.out.println(photoSensor.get());
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
+  public void execute() {
     // if(photoSensor.get() == true){
     // Robot.m_BeltOnly.belt(motorSpeed);
     // }else{
@@ -43,20 +43,14 @@ public class BeltAssist extends Command {
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
+  public boolean isFinished() {
     return false;
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end() {
+  public void end(boolean interrupted) {
     Robot.m_BeltOnly.belt(0);
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-    this.end();
-  }
 }

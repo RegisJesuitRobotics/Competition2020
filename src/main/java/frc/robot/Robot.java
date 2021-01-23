@@ -10,8 +10,9 @@ package frc.robot;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.commands.Drive;
 import frc.robot.commands.CommandGroups.Auto;
 import frc.robot.subsystems.BeltOnly;
 import frc.robot.subsystems.DriveTrain;
@@ -22,6 +23,7 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.ColorWheel;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 
@@ -44,7 +46,7 @@ public class Robot extends TimedRobot {
   NetworkTableEntry tx = table.getEntry("tx");
   NetworkTableEntry tv = table.getEntry("tv");
   boolean TVboolean = tv.getDouble(0.0) == 1;
-  Command m_autonomousCommand;
+  CommandBase m_autonomousCommand;
   double TX = tx.getDouble(0.0);
   double TY = ty.getDouble(0.0);
   PowerDistributionPanel PDP;
@@ -60,6 +62,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto mode", m_chooser);
 
     SmartDashboard.putData("Auto mode", m_chooser);
+    m_DriveTrain.setDefaultCommand(new Drive());
   }
 
   @Override
@@ -72,19 +75,19 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-    Scheduler.getInstance().run();
+    CommandScheduler.getInstance().run();
   }
 
   @Override
   public void autonomousInit() {
     if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
+      m_autonomousCommand.schedule();
     }
   }
 
   @Override
   public void autonomousPeriodic() {
-    Scheduler.getInstance().run();
+    CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("TY(shoots best if between -10 and -11)", TY);
     SmartDashboard.putNumber("TX(shoots best if between -1 and 1)", TX);
     SmartDashboard.putBoolean("Valid Target?", TVboolean);
@@ -93,12 +96,12 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-
+    m_autonomousCommand.cancel();
   }
 
   @Override
   public void teleopPeriodic() {
-    Scheduler.getInstance().run();
+    CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("TY", TY);
     SmartDashboard.putNumber("TX", TX);
     SmartDashboard.putBoolean("Valid Target?", TVboolean);

@@ -9,22 +9,15 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
  */
-public class BeltOnly extends Subsystem {
+public class BeltOnly extends SubsystemBase {
 
-  private TalonSRX belt;
-
-  @Override
-  public void initDefaultCommand() {
-
-    belt = new TalonSRX(RobotMap.BELT_PORT);
-
-  }
+  private TalonSRX belt = new TalonSRX(RobotMap.BELT_PORT);
 
   public void belt(double motorSpeed) {
 

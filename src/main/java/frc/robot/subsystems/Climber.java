@@ -15,21 +15,14 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Climber extends Subsystem {
-  DoubleSolenoid climberSolenoid;
-  CANSparkMax climberMotor, kickMotor;
-  TalonSRX climberSide;
+public class Climber extends SubsystemBase {
 
-
-  @Override
-  public void initDefaultCommand() {
-    climberSolenoid = new DoubleSolenoid(5, 6);
-    climberMotor = new CANSparkMax(420, MotorType.kBrushless);
-    kickMotor = new CANSparkMax(4209, MotorType.kBrushless);
-    climberSide = new TalonSRX(69);
-  }
+  DoubleSolenoid climberSolenoid = new DoubleSolenoid(5, 6);
+  CANSparkMax climberMotor = new CANSparkMax(420, MotorType.kBrushless);
+  CANSparkMax kickMotor = new CANSparkMax(4209, MotorType.kBrushless);
+  TalonSRX climberSide = new TalonSRX(69);
 
   public void sideClimb(double speed) {
     climberSide.set(ControlMode.PercentOutput, speed);

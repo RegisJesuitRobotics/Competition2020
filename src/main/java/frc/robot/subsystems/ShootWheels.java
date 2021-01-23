@@ -9,24 +9,18 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
  */
-public class ShootWheels extends Subsystem {
+public class ShootWheels extends SubsystemBase {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private TalonSRX shooterWheelLeft, shooterWheelRight;
-
-  @Override
-  public void initDefaultCommand() {
-    shooterWheelLeft = new TalonSRX(RobotMap.SHOOTER_WHEELS_PORT_LEFT);
-    shooterWheelRight = new TalonSRX(RobotMap.SHOOTER_WHEELS_PORT_RIGHT);
-
-  }
+  private TalonSRX shooterWheelLeft = new TalonSRX(RobotMap.SHOOTER_WHEELS_PORT_LEFT);
+  private TalonSRX shooterWheelRight = new TalonSRX(RobotMap.SHOOTER_WHEELS_PORT_RIGHT);
 
   public void shootAndIntake(double motorSpeed) {
 

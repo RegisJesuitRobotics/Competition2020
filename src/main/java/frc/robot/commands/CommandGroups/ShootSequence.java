@@ -7,16 +7,13 @@
 
 package frc.robot.commands.CommandGroups;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.ShooterManual.Belt;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.ShooterManual.ShooterShoot;
 
-public class ShootSequence extends CommandGroup {
- 
+public class ShootSequence extends ParallelCommandGroup {
+
   public ShootSequence() {
-    addParallel(new ShooterShoot(0.1));//sd sequenceShoot
-    setTimeout(2);
-    addParallel(new Belt(0.5));
-    
+
+    addCommands(new ShooterShoot(0.1), new BeltWithWait(2, 0.5));
   }
 }

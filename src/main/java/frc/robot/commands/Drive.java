@@ -1,21 +1,21 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class Drive extends Command {
+public class Drive extends CommandBase {
   public Drive() {
-    requires(Robot.m_DriveTrain);
+    addRequirements(Robot.m_DriveTrain);
   }
 
   @Override
-  protected void initialize() {
+  public void initialize() {
   }
 
   @Override
-  protected void execute() {
+  public void execute() {
 
     double leftSpeed = 1;
     double rightSpeed = 1;
@@ -45,23 +45,13 @@ public class Drive extends Command {
   }
 
   @Override
-  protected boolean isFinished() {
+  public boolean isFinished() {
     return false;
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end() {
-    Robot.m_DriveTrain.setLeftMotorBack(0);
-    Robot.m_DriveTrain.setRightMotorBack(0);
-    Robot.m_DriveTrain.setLeftMotorFront(0);
-    Robot.m_DriveTrain.setRightMotorFront(0);
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-    this.end();
+  public void end(boolean interrupted) {
+    Robot.m_DriveTrain.setAll(0);
   }
 }

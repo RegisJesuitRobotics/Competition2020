@@ -4,23 +4,16 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
-import frc.robot.commands.Drive;
 
-public class DriveTrain extends Subsystem {
-  private TalonSRX leftBack, leftFront, rightBack, rightFront;
+public class DriveTrain extends SubsystemBase {
+    
+  private TalonSRX leftBack = new TalonSRX(RobotMap.LEFT_BACK_PORT);
+  private TalonSRX leftFront = new TalonSRX(RobotMap.LEFT_FRONT_PORT);
+  private TalonSRX rightBack = new TalonSRX(RobotMap.RIGHT_BACK_PORT);
+  private TalonSRX rightFront = new TalonSRX(RobotMap.RIGHT_FRONT_PORT);
 
-  @Override
-  public void initDefaultCommand() {
-
-    setDefaultCommand(new Drive());
-    leftBack = new TalonSRX(RobotMap.LEFT_BACK_PORT);
-    leftFront = new TalonSRX(RobotMap.LEFT_FRONT_PORT);
-    rightBack = new TalonSRX(RobotMap.RIGHT_BACK_PORT);
-    rightFront = new TalonSRX(RobotMap.RIGHT_FRONT_PORT);
-
-  }
 
   public void setAll(double allSpeed) {
     setLeftMotorBack(allSpeed);

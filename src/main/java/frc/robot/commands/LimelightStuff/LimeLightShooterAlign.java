@@ -10,10 +10,10 @@ package frc.robot.commands.LimelightStuff;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class LimeLightShooterAlign extends Command {
+public class LimeLightShooterAlign extends CommandBase {
   int m_defaultDirection;
   double m_max;
   public LimeLightShooterAlign(int defaultDirection, double max) {
@@ -22,17 +22,17 @@ public class LimeLightShooterAlign extends Command {
     // Use requires() here to declare subsystem dependencies align
     // eg. requires(chassis);
 
-    requires(Robot.m_Shooter);
+    addRequirements(Robot.m_Shooter);
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  public void initialize() {
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
+  public void execute() {
     NetworkTableInstance instance = NetworkTableInstance.getDefault();
     NetworkTable table = instance.getTable("limelight-limeboi");
     // NetworkTable fms = instance.getTable("FMSInfo");
@@ -73,21 +73,14 @@ public class LimeLightShooterAlign extends Command {
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
+  public boolean isFinished() {
     return false;
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end() {
+  public void end(boolean interrupted) {
     Robot.m_UpAndDown.aim(0);
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-    this.end();
   }
 
 }
