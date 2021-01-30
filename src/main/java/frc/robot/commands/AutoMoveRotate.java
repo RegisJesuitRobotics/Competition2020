@@ -29,7 +29,7 @@ public class AutoMoveRotate extends CommandBase {
   @Override
   public void initialize() {
     // TODO: This needs to be calculated with the desired seconds
-    autoMove = new AutoMove(0.2, 0.2, 0.2, 0.2).deadlineWith(new WaitCommand(desiredSeconds));
+    autoMove = new AutoMove(-0.2, -0.2, 0.2, 0.2).deadlineWith(new WaitCommand(desiredSeconds));
     autoMove.schedule();
   }
 

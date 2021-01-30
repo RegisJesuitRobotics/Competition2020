@@ -10,9 +10,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class climberShuffle extends CommandBase {
+public class ClimberShuffle extends CommandBase {
   double m_speed;
-  public climberShuffle(double speed) {
+  public ClimberShuffle(double speed) {
     addRequirements(Robot.m_Climber);
     m_speed = speed;
   }
