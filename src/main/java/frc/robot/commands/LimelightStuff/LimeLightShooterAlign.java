@@ -10,12 +10,14 @@ package frc.robot.commands.LimelightStuff;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
 public class LimeLightShooterAlign extends CommandBase {
   int m_defaultDirection;
   double m_max;
+
   public LimeLightShooterAlign(int defaultDirection, double max) {
     m_defaultDirection = defaultDirection;
     m_max = max;
@@ -35,20 +37,17 @@ public class LimeLightShooterAlign extends CommandBase {
   public void execute() {
     NetworkTableInstance instance = NetworkTableInstance.getDefault();
     NetworkTable table = instance.getTable("limelight-limeboi");
-    // NetworkTable fms = instance.getTable("FMSInfo");
-    // NetworkTableEntry g = fms.getEntry("StationNumber");
-    // NetworkTableEntry tx = table.getEntry("tx");
     NetworkTableEntry ty = table.getEntry("ty");
     NetworkTableEntry tv = table.getEntry("tv");
     boolean TVboolean = tv.getDouble(0.0) == 1;
-    if(!TVboolean){
-      if(m_defaultDirection == 0){
+    if (!TVboolean) {
+      if (m_defaultDirection == 0) {
         Robot.m_UpAndDown.aim(0);
       }
-      if(m_defaultDirection == 1){
+      if (m_defaultDirection == 1) {
         Robot.m_UpAndDown.aim(-0.2);
       }
-      if(m_defaultDirection == -1){
+      if (m_defaultDirection == -1) {
         Robot.m_UpAndDown.aim(0.2);
       }
     }
@@ -56,14 +55,15 @@ public class LimeLightShooterAlign extends CommandBase {
       System.out.println("You have a valid target");
       if (ty.getDouble(0.0) > -10.5 - m_max) {
         // go up
-        System.out.println("UUUUUUUUUUUP");
+        SmartDashboard.putString("Shooter Align Status", "UP");
+
         Robot.m_UpAndDown.aim(-0.5);
       } else if (ty.getDouble(0.0) < -11.5 - m_max) {
         // go down
-        System.out.println("NOT UUUUUUUUUP");
+        SmartDashboard.putString("Shooter Align Status", "DOWN");
         Robot.m_UpAndDown.aim(0.22);
       } else {
-        System.out.println("stop");
+        SmartDashboard.putString("Shooter Align Status", "STOPPED");
         Robot.m_UpAndDown.aim(0);
       }
     } else {

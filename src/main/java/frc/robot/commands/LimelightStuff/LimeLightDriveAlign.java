@@ -52,7 +52,7 @@ public class LimeLightDriveAlign extends CommandBase {
         Robot.m_DriveTrain.setAll(-0.3);
       }
       System.out.println("You do not hava a valid target");
-    } else if (TVboolean) {
+    } else {
       System.out.println("You have a valid target");
       if (tx.getDouble(0.0) > 10) {
         // turn right

@@ -50,6 +50,6 @@ public class RobotMap {
   public static final int RIGHT_BACK_PORT = 0;
   public static final int RIGHT_FRONT_PORT = 1;
   public static final int INTAKE_DROP_PORT = 42069;
-  public static final int INTAKE_BAR_PORT = 5;
+  public static final int INTAKE_BAR_PORT = 6;
 
 }
