@@ -60,8 +60,8 @@ public class OI {
     //Start Driver controls
     buttonCircle.whileHeld(new IntakeRun(-0.7));
     buttonX.whileHeld(new IntakeRun(0.7));
-    buttonSquare.whileHeld(new IntakeDrop(1));
-    buttonTriangle.whileHeld(new IntakeDrop(-1));
+    buttonSquare.whileHeld(new IntakeDrop(Enums.IntakeDirection.FORWARD));
+    buttonTriangle.whileHeld(new IntakeDrop(Enums.IntakeDirection.REVERSE));
     buttonOptions.whileHeld(new ClimberDeploy(.30, 1));
     buttonShare.whileHeld(new ClimberDeploy(-.30, -1));
     //buttonLeftBumper.whileHeld(new Auto());

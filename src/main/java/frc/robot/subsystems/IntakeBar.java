@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
+
+import frc.robot.Enums;
 import frc.robot.RobotMap;
 
 public class IntakeBar extends SubsystemBase {
@@ -24,14 +26,14 @@ public class IntakeBar extends SubsystemBase {
     intakeSparkMax.set(motorSpeed);
   }
 
-  public void intakeMove(int direction) {
-    if (direction == -1) {
+  public void intakeMove(Enums.IntakeDirection direction) {
+    if (direction == Enums.IntakeDirection.REVERSE) {
     //  System.out.println("reverse");
       intakeSolenoid.set(kReverse);
-    } else if (direction == 1) {
+    } else if (direction == Enums.IntakeDirection.FORWARD) {
     //  System.out.println("forward");
       intakeSolenoid.set(kForward);
-    } else if (direction == 0) {
+    } else if (direction == Enums.IntakeDirection.STOP) {
       intakeSolenoid.set(kOff);
 
     }

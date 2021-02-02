@@ -9,4 +9,9 @@ public enum DirectionEnum{
     STOP
 
 }
+public enum IntakeDirection {
+    REVERSE,
+    FORWARD,
+    STOP
+  }
 }

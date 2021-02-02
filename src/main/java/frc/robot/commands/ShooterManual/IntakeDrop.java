@@ -8,11 +8,12 @@
 package frc.robot.commands.ShooterManual;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Enums;
 import frc.robot.Robot;
 
 public class IntakeDrop extends CommandBase {
-  int direction;
-  public IntakeDrop(int m_direction) {
+  Enums.IntakeDirection direction;
+  public IntakeDrop(Enums.IntakeDirection m_direction) {
     // Use requires() here to declare subsystem dependencies
     addRequirements(Robot.m_UpAndDown);
     direction = m_direction;
@@ -38,6 +39,6 @@ public class IntakeDrop extends CommandBase {
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-    Robot.m_IntakeBar.intakeMove(0);
+    Robot.m_IntakeBar.intakeMove(Enums.IntakeDirection.STOP);
   }
 }
