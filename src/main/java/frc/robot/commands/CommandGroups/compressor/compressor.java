@@ -3,7 +3,7 @@ package frc.robot.commands.CommandGroups.compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class compressor extends SubsystemBase {
+public class Compressor extends SubsystemBase {
 
     /*
      * The Pneumatics Control Module (PCM) we will be using has been given the
@@ -18,7 +18,7 @@ public class compressor extends SubsystemBase {
     /**
      * Creates a new PneumaticsSubsystem.
      */
-    public compressor() {
+    public Compressor() {
     super(); //add this
     try {
       doubleSolenoid = new DoubleSolenoid(0, 1);
