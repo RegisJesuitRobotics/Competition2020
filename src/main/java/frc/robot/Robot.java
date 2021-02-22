@@ -29,7 +29,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 public class Robot extends TimedRobot {
   
   public static OI m_oi;
-  public static DriveTrain m_DriveTrain = new DriveTrain();
+  public static DriveTrain m_DriveTrain;
   public static ShootWheels m_Shooter = new ShootWheels();
   public static BeltOnly m_BeltOnly = new BeltOnly();
   public static UpAndDown m_UpAndDown = new UpAndDown();
@@ -55,6 +55,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_autonomousCommand = new Auto();
     m_oi = new OI();
+    m_DriveTrain = new DriveTrain();
 
     PDP = new PowerDistributionPanel();
     
@@ -65,7 +66,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    PDP.clearStickyFaults();
+    
   }
 
   @Override
