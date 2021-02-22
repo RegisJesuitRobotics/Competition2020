@@ -11,9 +11,13 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Enums.DirectionEnum;
+import frc.robot.commands.AutoMove;
 import frc.robot.commands.ClimberDeploy;
+import frc.robot.commands.CommandGroups.IntakorBarThingy;
+import frc.robot.commands.CommandGroups.ShootSequence;
 import frc.robot.commands.LimelightStuff.LimeLightDriveAlign;
 import frc.robot.commands.LimelightStuff.LimeLightShooterAlign;
+import frc.robot.commands.LimelightStuff.LimeLightShooterAlignClose;
 import frc.robot.commands.ShooterManual.Belt;
 import frc.robot.commands.ShooterManual.IntakeDrop;
 import frc.robot.commands.ShooterManual.IntakeRun;
@@ -49,6 +53,9 @@ public class OI {
   Button operatorBouchPad = new JoystickButton(operatorController, 14);
   Button operatorButtonOptions = new JoystickButton(operatorController, 10);
   Button operatorButtonShare = new JoystickButton(operatorController, 9);
+  Button operatorPlayStation = new JoystickButton(operatorController, 13);
+  Button operatorLeftButton = new JoystickButton(operatorController, 11);
+  Button operatorRightButton = new JoystickButton(operatorController, 12);
   // Button operatorDPadUp = new JoystickButton(operatorController, 0);
   Button operatorDPadRight = new JoystickButton(operatorController, 90);
   Button operatorDPadDown = new JoystickButton(operatorController, 180);
@@ -64,6 +71,8 @@ public class OI {
     buttonTriangle.whileHeld(new IntakeDrop(Enums.IntakeDirection.REVERSE));
     buttonOptions.whileHeld(new ClimberDeploy(.30, 1));
     buttonShare.whileHeld(new ClimberDeploy(-.30, -1));
+
+    buttonOptions.whileHeld(new AutoMove(0, 0.1));
     //buttonLeftBumper.whileHeld(new Auto());
     //end driver controls
 
@@ -77,8 +86,11 @@ public class OI {
     operatorButtonRightBumper.whileHeld(new Belt(-1));
     operatorRightTrigger.whileHeld(new ShooterShoot(0.8));
     operatorButtonShare.whileHeld(new LimeLightShooterAlign(1, 0));
+    operatorLeftButton.whileHeld(new LimeLightShooterAlignClose());
     operatorButtonOptions.whileHeld(new LimeLightDriveAlign(DirectionEnum.STOP));
     operatorLeftTrigger.whileHeld(new ShooterShoot(0.95));
+    operatorPlayStation.whileHeld(new IntakorBarThingy());
+    operatorRightButton.whileHeld(new ShootSequence());
     //End Nicks operator controls
   }
 

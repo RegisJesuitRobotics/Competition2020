@@ -8,45 +8,48 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Robot;
+import frc.robot.subsystems.DriveTrain;
 
 public class AutoMoveRotate extends CommandBase {
   /**
    * Creates a new AutoMoveRotate.
    */
-  private final double desiredSeconds;
-  private ParallelDeadlineGroup autoMove;
+  private final double speed;
+  private final int degrees;
+
+  private final DriveTrain driveTrain;
 
 
-  public AutoMoveRotate(double degrees, double desiredSeconds) {
+  public AutoMoveRotate(int degrees, double speed) {
     addRequirements(Robot.m_DriveTrain);
-    this.desiredSeconds = desiredSeconds;
+    this.speed = speed;
+    this.degrees = degrees;
+    this.driveTrain = Robot.m_DriveTrain;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // TODO: This needs to be calculated with the desired seconds
-    autoMove = new AutoMove(-0.2, -0.2, 0.2, 0.2).deadlineWith(new WaitCommand(desiredSeconds));
-    autoMove.schedule();
+    driveTrain.resetEncoders();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    driveTrain.arcadeDrive(0, speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    autoMove.cancel();
+    driveTrain.arcadeDrive(0, 0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    // TODO Calculate distance rotated based on incehs calculated by encoders
     return false;
   }
 }

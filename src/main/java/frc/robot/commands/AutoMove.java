@@ -11,13 +11,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
 public class AutoMove extends CommandBase {
-  double m_leftFrontSpeed, m_leftBackSpeed, m_rightFrontSpeed, m_rightBackSpeed;
+  double m_leftSpeed, m_rightSpeed;
 
-  public AutoMove(double lfspeed, double lbspeed, double rfspeed, double rbspeed) {
-    m_leftFrontSpeed = lfspeed;
-    m_leftBackSpeed = lbspeed;
-    m_rightFrontSpeed = rfspeed;
-    m_rightBackSpeed = rbspeed;
+  public AutoMove(double leftSpeed, double rightSpeed) {
+    m_leftSpeed = leftSpeed;
+    m_rightSpeed = rightSpeed;
     addRequirements(Robot.m_DriveTrain);
 
   }
@@ -25,14 +23,11 @@ public class AutoMove extends CommandBase {
   @Override
   public void initialize() {
     System.out.println("auto driving");
-    Robot.m_DriveTrain.setLeftMotorBack(m_leftBackSpeed);
-    Robot.m_DriveTrain.setLeftMotorFront(m_leftFrontSpeed);
-    Robot.m_DriveTrain.setRightMotorBack(m_rightBackSpeed);
-    Robot.m_DriveTrain.setRightMotorFront(m_rightFrontSpeed);
   }
 
   @Override
   public void execute() {
+    Robot.m_DriveTrain.tankDrive(m_leftSpeed, m_rightSpeed);
   }
 
   @Override

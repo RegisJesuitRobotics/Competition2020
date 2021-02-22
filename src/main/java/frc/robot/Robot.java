@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.commands.Drive;
 import frc.robot.commands.CommandGroups.Auto;
 import frc.robot.subsystems.BeltOnly;
 import frc.robot.subsystems.DriveTrain;
@@ -62,12 +61,11 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto mode", m_chooser);
 
     SmartDashboard.putData("Auto mode", m_chooser);
-    m_DriveTrain.setDefaultCommand(new Drive());
   }
 
   @Override
   public void robotPeriodic() {
-    // PDP.clearStickyFaults();
+    PDP.clearStickyFaults();
   }
 
   @Override
