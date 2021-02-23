@@ -53,8 +53,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    m_autonomousCommand = new Auto();
     m_DriveTrain = new DriveTrain();
+    m_autonomousCommand = new Auto();
     m_oi = new OI();
 
     PDP = new PowerDistributionPanel();
