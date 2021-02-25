@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Enums.DirectionEnum;
 import frc.robot.commands.AutoMove;
-import frc.robot.commands.CommandGroups.IntakorBarThingy;
+import frc.robot.commands.CommandGroups.IntakeBall;
 import frc.robot.commands.CommandGroups.ShootSequence;
 import frc.robot.commands.LimelightStuff.LimeLightDriveAlign;
 import frc.robot.commands.LimelightStuff.LimeLightShooterAlign;
@@ -86,7 +86,7 @@ public class OI {
     operatorLeftButton.whileHeld(new LimeLightShooterAlignClose());
     operatorButtonOptions.whileHeld(new LimeLightDriveAlign(DirectionEnum.STOP));
     operatorLeftTrigger.whileHeld(new ShooterShoot(0.95));
-    operatorPlayStation.whileHeld(new IntakorBarThingy());
+    operatorPlayStation.whileHeld(new IntakeBall());
     operatorRightButton.whileHeld(new ShootSequence());
     //End Nicks operator controls
   }

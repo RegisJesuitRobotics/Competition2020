@@ -14,11 +14,11 @@ import frc.robot.commands.ShooterManual.ShooterShoot;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class IntakorBarThingy extends ParallelCommandGroup {
+public class IntakeBall extends ParallelCommandGroup {
   /**
    * Creates a new IntakorBarThingy.
    */
-  public IntakorBarThingy() {
+  public IntakeBall() {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
     super(new IntakeRun(-0.7), new ShooterShoot(-0.3));
