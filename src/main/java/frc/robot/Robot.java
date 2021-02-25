@@ -18,8 +18,6 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ShootWheels;
 import frc.robot.subsystems.UpAndDown;
 import frc.robot.subsystems.IntakeBar;
-import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.ColorWheel;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -34,8 +32,6 @@ public class Robot extends TimedRobot {
   public static BeltOnly m_BeltOnly = new BeltOnly();
   public static UpAndDown m_UpAndDown = new UpAndDown();
   public static IntakeBar m_IntakeBar = new IntakeBar();
-  public static Climber m_Climber = new Climber();
-  public static ColorWheel m_ColorWheel = new ColorWheel();
   // read values periodically
   NetworkTableInstance instance = NetworkTableInstance.getDefault();
   NetworkTable table = instance.getTable("limelight-limeboi");

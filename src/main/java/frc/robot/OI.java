@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Enums.DirectionEnum;
 import frc.robot.commands.AutoMove;
-import frc.robot.commands.ClimberDeploy;
 import frc.robot.commands.CommandGroups.IntakorBarThingy;
 import frc.robot.commands.CommandGroups.ShootSequence;
 import frc.robot.commands.LimelightStuff.LimeLightDriveAlign;
@@ -69,8 +68,6 @@ public class OI {
     buttonX.whileHeld(new IntakeRun(0.7));
     buttonSquare.whileHeld(new IntakeDrop(Enums.IntakeDirection.FORWARD));
     buttonTriangle.whileHeld(new IntakeDrop(Enums.IntakeDirection.REVERSE));
-    buttonOptions.whileHeld(new ClimberDeploy(.30, 1));
-    buttonShare.whileHeld(new ClimberDeploy(-.30, -1));
 
     buttonOptions.whileHeld(new AutoMove(0, 0.1));
     //buttonLeftBumper.whileHeld(new Auto());
