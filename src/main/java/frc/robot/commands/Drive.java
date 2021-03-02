@@ -38,7 +38,7 @@ public class Drive extends CommandBase {
       rightSpeed = Speed;
     }
     // System.out.println("Driving");
-    Robot.m_DriveTrain.tankDrive(leftSpeed * -RobotMap.LIMITER, rightSpeed * RobotMap.LIMITER);
+    Robot.m_DriveTrain.tankDrive(leftSpeed * -RobotMap.LIMITER, rightSpeed * -RobotMap.LIMITER);
   }
 
   @Override

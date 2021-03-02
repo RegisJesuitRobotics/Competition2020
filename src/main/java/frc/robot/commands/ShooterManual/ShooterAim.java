@@ -16,7 +16,7 @@ public class ShooterAim extends CommandBase {
   public ShooterAim(double m_motorSpeed) {
     // Use requires() here to declare subsystem dependencies
     motorSpeed = m_motorSpeed;
-    addRequirements(Robot.m_UpAndDown);
+    // addRequirements(Robot.m_UpAndDown);
   }
 
   // Called just before this Command runs the first time

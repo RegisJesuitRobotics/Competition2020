@@ -69,7 +69,7 @@ public class OI {
     buttonSquare.whileHeld(new IntakeDrop(Enums.IntakeDirection.FORWARD));
     buttonTriangle.whileHeld(new IntakeDrop(Enums.IntakeDirection.REVERSE));
 
-    buttonOptions.whileHeld(new AutoMove(0, 0.1));
+    buttonOptions.whileHeld(new AutoMove(0.2, 0.2));
     //buttonLeftBumper.whileHeld(new Auto());
     //end driver controls
 

@@ -1,14 +1,12 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
-import frc.robot.commands.Drive;
 
 public class DriveTrain extends SubsystemBase {
 
@@ -16,17 +14,14 @@ public class DriveTrain extends SubsystemBase {
   private WPI_TalonSRX leftFollower = new WPI_TalonSRX(RobotMap.LEFT_FRONT_PORT);
   private WPI_TalonSRX rightLeader = new WPI_TalonSRX(RobotMap.RIGHT_BACK_PORT);
   private WPI_TalonSRX rightFollower = new WPI_TalonSRX(RobotMap.RIGHT_FRONT_PORT);
-
-  // private Encoder leftEncoder = new Encoder(0, 0);
-  // private Encoder rightEncoder = new Encoder(0, 0);
   
-
-  private DifferentialDrive differentialDrive = new DifferentialDrive(leftLeader, rightLeader);
+  private DifferentialDrive differentialDrive;
 
   public DriveTrain() {
-    setDefaultCommand(new Drive());
     leftFollower.follow(leftLeader);
     rightFollower.follow(rightLeader);
+    leftLeader.setSelectedSensorPosition(0.0);
+    differentialDrive = new DifferentialDrive(leftLeader, rightLeader);
   }
 
   public void resetEncoders() {
@@ -53,25 +48,9 @@ public class DriveTrain extends SubsystemBase {
     return null;
   }
 
-  public void setAllSafely() {
-    leftLeader.setSafetyEnabled(false);
-    leftFollower.setSafetyEnabled(false);
-
-    rightLeader.setSafetyEnabled(false);
-    rightFollower.setSafetyEnabled(false);
-  }
-
   public void setAll(double allSpeed) {
-    setLeft(allSpeed);
-    setRight(allSpeed);
-  }
-
-  public void setLeft(double leftSpeed) {
-    leftLeader.set(ControlMode.PercentOutput, leftSpeed);
-  }
-
-  public void setRight(double rightSpeed) {
-    rightLeader.set(ControlMode.PercentOutput, rightSpeed);
+    differentialDrive.tankDrive(allSpeed, allSpeed);
+    System.out.println(leftLeader.getSelectedSensorPosition());
   }
 
   public void arcadeDrive(double xSpeed, double zRotation) {

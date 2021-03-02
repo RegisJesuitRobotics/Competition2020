@@ -46,7 +46,7 @@ public class RobotMap {
 
   // drive train ports
   public static final int LEFT_BACK_PORT = 15;
-  public static final int LEFT_FRONT_PORT = 14;
+  public static final int LEFT_FRONT_PORT = 3;
   public static final int RIGHT_BACK_PORT = 0;
   public static final int RIGHT_FRONT_PORT = 1;
   public static final int INTAKE_DROP_PORT = 42069;

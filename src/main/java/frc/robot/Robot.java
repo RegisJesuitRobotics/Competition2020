@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.commands.Drive;
 import frc.robot.commands.CommandGroups.Auto;
 import frc.robot.subsystems.BeltOnly;
 import frc.robot.subsystems.DriveTrain;
@@ -27,7 +28,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 public class Robot extends TimedRobot {
   
   public static OI m_oi;
-  public static DriveTrain m_DriveTrain;
+  public static DriveTrain m_DriveTrain = new DriveTrain();
   public static ShootWheels m_Shooter = new ShootWheels();
   public static BeltOnly m_BeltOnly = new BeltOnly();
   public static UpAndDown m_UpAndDown = new UpAndDown();
@@ -49,11 +50,12 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    m_DriveTrain = new DriveTrain();
+    m_DriveTrain.setDefaultCommand(new Drive());
     m_autonomousCommand = new Auto();
-    m_oi = new OI();
-
+    
     PDP = new PowerDistributionPanel();
+
+    m_oi = new OI();
     
     SmartDashboard.putData("Auto mode", m_chooser);
 
