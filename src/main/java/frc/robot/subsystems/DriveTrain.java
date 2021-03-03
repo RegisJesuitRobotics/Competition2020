@@ -3,7 +3,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
@@ -14,19 +13,21 @@ public class DriveTrain extends SubsystemBase {
   private WPI_TalonSRX leftFollower = new WPI_TalonSRX(RobotMap.LEFT_FRONT_PORT);
   private WPI_TalonSRX rightLeader = new WPI_TalonSRX(RobotMap.RIGHT_BACK_PORT);
   private WPI_TalonSRX rightFollower = new WPI_TalonSRX(RobotMap.RIGHT_FRONT_PORT);
+
+  private final double sensorToInchesConstant = 0.00095;
   
   private DifferentialDrive differentialDrive;
 
   public DriveTrain() {
     leftFollower.follow(leftLeader);
     rightFollower.follow(rightLeader);
-    leftLeader.setSelectedSensorPosition(0.0);
+    resetEncoders();
     differentialDrive = new DifferentialDrive(leftLeader, rightLeader);
   }
 
   public void resetEncoders() {
-    // leftEncoder.reset();
-    // rightEncoder.reset();
+    leftLeader.setSelectedSensorPosition(0.0);
+    rightLeader.setSelectedSensorPosition(0.0);
   }
 
   public void tankDrive(double leftSpeed, double rightSpeed) {
@@ -34,18 +35,11 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getAverageEncoderDistance() {
-    // return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
-    return 0;
+    return ((leftLeader.getSelectedSensorPosition() + -rightLeader.getSelectedSensorPosition()) / 2) * sensorToInchesConstant;
   }
 
-  public Encoder getLeftEncoder() {
-    // return leftEncoder;
-    return null;
-  }
-
-  public Encoder getRightEncoder() {
-    // return rightEncoder;  
-    return null;
+  public double getDifferenceInEncoderDistance() {
+    return ((leftLeader.getSelectedSensorPosition() + rightLeader.getSelectedSensorPosition())) * sensorToInchesConstant;
   }
 
   public void setAll(double allSpeed) {

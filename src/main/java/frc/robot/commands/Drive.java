@@ -1,6 +1,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -37,7 +38,6 @@ public class Drive extends CommandBase {
       leftSpeed = Speed;
       rightSpeed = Speed;
     }
-    // System.out.println("Driving");
     Robot.m_DriveTrain.tankDrive(leftSpeed * -RobotMap.LIMITER, rightSpeed * -RobotMap.LIMITER);
   }
 

@@ -23,6 +23,10 @@ public class AutoMoveRotate extends CommandBase {
 
   public AutoMoveRotate(int degrees, double speed) {
     addRequirements(Robot.m_DriveTrain);
+    if (degrees < 0) {
+      degrees = Math.abs(degrees);
+      speed = speed * -1;
+    }
     this.speed = speed;
     this.degrees = degrees;
     this.driveTrain = Robot.m_DriveTrain;
@@ -32,6 +36,7 @@ public class AutoMoveRotate extends CommandBase {
   @Override
   public void initialize() {
     driveTrain.resetEncoders();
+    driveTrain.arcadeDrive(0, speed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -50,6 +55,6 @@ public class AutoMoveRotate extends CommandBase {
   @Override
   public boolean isFinished() {
     // TODO Calculate distance rotated based on incehs calculated by encoders
-    return false;
+    return Math.abs(driveTrain.getDifferenceInEncoderDistance()) >= degrees * 0.55;
   }
 }

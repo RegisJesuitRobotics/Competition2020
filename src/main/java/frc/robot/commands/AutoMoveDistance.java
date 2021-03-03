@@ -16,13 +16,17 @@ public class AutoMoveDistance extends CommandBase {
    * Creates a new AutoMoveDistance.
    */
 
-  private final float speed;
+  private final double speed;
   private final int inches;
   private final DriveTrain driveTrain;
 
-  public AutoMoveDistance(int inches, float speed) {
+  public AutoMoveDistance(int inches, double speed) {
     addRequirements(Robot.m_DriveTrain);
     this.driveTrain = Robot.m_DriveTrain;
+    if (inches < 0) {
+      inches = Math.abs(inches);
+      speed = speed * -1;
+    }
     this.inches = inches;
     this.speed = speed;
   }
@@ -31,6 +35,7 @@ public class AutoMoveDistance extends CommandBase {
   @Override
   public void initialize() {
     driveTrain.resetEncoders();
+    driveTrain.arcadeDrive(speed, 0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -48,6 +53,6 @@ public class AutoMoveDistance extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return driveTrain.getAverageEncoderDistance() >= inches;
+    return Math.abs(driveTrain.getAverageEncoderDistance()) >= inches;
   }
 }

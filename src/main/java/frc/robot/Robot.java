@@ -103,6 +103,9 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("TY", TY);
     SmartDashboard.putNumber("TX", TX);
     SmartDashboard.putBoolean("Valid Target?", TVboolean);
+    SmartDashboard.putNumber("Encoder distance", m_DriveTrain.getAverageEncoderDistance());
+    SmartDashboard.putNumber("Encoder differance", m_DriveTrain.getDifferenceInEncoderDistance());
+
     // System.out.println("TOTAL CURRENT: " + PDP.getTotalCurrent());
 
   }
