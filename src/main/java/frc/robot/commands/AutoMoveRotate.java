@@ -23,10 +23,10 @@ public class AutoMoveRotate extends CommandBase {
 
   public AutoMoveRotate(int degrees, double speed) {
     addRequirements(Robot.m_DriveTrain);
-    if (degrees < 0) {
-      degrees = Math.abs(degrees);
+    if (degrees > 0) {
       speed = speed * -1;
     }
+    degrees = Math.abs(degrees);
     this.speed = speed;
     this.degrees = degrees;
     this.driveTrain = Robot.m_DriveTrain;

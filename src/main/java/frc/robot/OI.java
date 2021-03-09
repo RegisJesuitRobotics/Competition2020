@@ -7,20 +7,14 @@
 
 package frc.robot;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Enums.DirectionEnum;
-import frc.robot.commands.AutoMove;
-import frc.robot.commands.AutoMoveDistance;
 import frc.robot.commands.AutoMoveRotate;
 import frc.robot.commands.CommandGroups.IntakeBall;
 import frc.robot.commands.CommandGroups.ShootSequence;
+import frc.robot.commands.CommandGroups.autoNavChallenge.Slalomn;
 import frc.robot.commands.CommandGroups.autoNavChallenge.TestAuto;
 import frc.robot.commands.LimelightStuff.LimeLightDriveAlign;
 import frc.robot.commands.LimelightStuff.LimeLightShooterAlign;
@@ -71,41 +65,33 @@ public class OI {
   Button operatorLeftTrigger = new JoystickButton(operatorController, 7);
 
   public OI() {
-    //Start Driver controls
+    // Start Driver controls
     buttonCircle.whileHeld(new IntakeRun(-0.7));
     buttonX.whileHeld(new IntakeRun(0.7));
     buttonSquare.whileHeld(new IntakeDrop(Enums.IntakeDirection.FORWARD));
     buttonTriangle.whileHeld(new IntakeDrop(Enums.IntakeDirection.REVERSE));
 
     buttonOptions.toggleWhenPressed(new AutoMoveRotate(720, 0.7));
-    buttonShare.toggleWhenPressed(new TestAuto());
-    // buttonShare.whileHeld(new Command(){
-    
-    //   @Override
-    //   public Set<Subsystem> getRequirements() {
-    //     // TODO Auto-generated method stub
-    //     return new HashSet<>();
-    //   }
+    buttonShare.toggleWhenPressed(new Slalomn());
+    // end driver controls
 
-    //   @Override
-    //   public void execute() {
-    //     Robot.m_DriveTrain.arcadeDrive(-0.5, 0);
-    //   }
+    // Start Nicks operator controls
+    operatorButtonTriangle.whileHeld(new ShooterAim(-0.7));
+    operatorButtonSquare.whileHeld(new ShooterAim(0.7));
+    operatorButtonCircle.whileHeld(new ShooterShoot(-0.3));
+    operatorButtonX.whileHeld(new ShooterShoot(0.8));
 
-    //   @Override
-    //   public void end(boolean i) {
-    //     Robot.m_DriveTrain.arcadeDrive(0, 0);
-    //   }
-    // });
-  // buttonLeftBumper.whileHeld(new Auto());
-  // end driver controls
+    operatorButtonLeftBumper.whileHeld(new Belt(1));
+    operatorButtonRightBumper.whileHeld(new Belt(-1));
+    operatorRightTrigger.whileHeld(new ShooterShoot(0.8));
+    operatorButtonShare.whileHeld(new LimeLightShooterAlign(1, 0));
+    operatorLeftButton.whileHeld(new LimeLightShooterAlignClose());
+    operatorButtonOptions.whileHeld(new LimeLightDriveAlign(DirectionEnum.STOP));
+    operatorLeftTrigger.whileHeld(new ShooterShoot(0.95));
+    operatorPlayStation.whileHeld(new IntakeBall());
+    operatorRightButton.whileHeld(new ShootSequence());
 
-  // Start Nicks operator controls
-  operatorButtonTriangle.whileHeld(new ShooterAim(-0.7));operatorButtonSquare.whileHeld(new ShooterAim(0.7));operatorButtonCircle.whileHeld(new ShooterShoot(-0.3));operatorButtonX.whileHeld(new ShooterShoot(0.8));
-
-  operatorButtonLeftBumper.whileHeld(new Belt(1));operatorButtonRightBumper.whileHeld(new Belt(-1));operatorRightTrigger.whileHeld(new ShooterShoot(0.8));operatorButtonShare.whileHeld(new LimeLightShooterAlign(1,0));operatorLeftButton.whileHeld(new LimeLightShooterAlignClose());operatorButtonOptions.whileHeld(new LimeLightDriveAlign(DirectionEnum.STOP));operatorLeftTrigger.whileHeld(new ShooterShoot(0.95));operatorPlayStation.whileHeld(new IntakeBall());operatorRightButton.whileHeld(new ShootSequence());
-
-  // End Nicks operator controls
+    // End Nicks operator controls
   }
 
   public double GetDriverRawStickAxis(int stickAxis) {

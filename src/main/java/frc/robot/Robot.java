@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -42,6 +43,7 @@ public class Robot extends TimedRobot {
   NetworkTableEntry tx = table.getEntry("tx");
   NetworkTableEntry tv = table.getEntry("tv");
   boolean TVboolean = tv.getDouble(0.0) == 1;
+  DigitalInput ballSensor;
   CommandBase m_autonomousCommand;
   double TX = tx.getDouble(0.0);
   double TY = ty.getDouble(0.0);
@@ -56,15 +58,16 @@ public class Robot extends TimedRobot {
     PDP = new PowerDistributionPanel();
 
     m_oi = new OI();
+
+    ballSensor = new DigitalInput(1);
     
     SmartDashboard.putData("Auto mode", m_chooser);
 
-    SmartDashboard.putData("Auto mode", m_chooser);
   }
 
   @Override
   public void robotPeriodic() {
-    
+    SmartDashboard.putData("Sensor value", ballSensor);
   }
 
   @Override
@@ -105,9 +108,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Valid Target?", TVboolean);
     SmartDashboard.putNumber("Encoder distance", m_DriveTrain.getAverageEncoderDistance());
     SmartDashboard.putNumber("Encoder differance", m_DriveTrain.getDifferenceInEncoderDistance());
-
     // System.out.println("TOTAL CURRENT: " + PDP.getTotalCurrent());
-
   }
 
   @Override
