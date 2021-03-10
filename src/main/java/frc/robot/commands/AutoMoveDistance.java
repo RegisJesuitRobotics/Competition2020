@@ -34,6 +34,7 @@ public class AutoMoveDistance extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    System.out.println("I hit the reset!!!!!!!!!!!!!!!!!!");
     driveTrain.resetEncoders();
     driveTrain.arcadeDrive(speed, 0);
   }
@@ -48,6 +49,7 @@ public class AutoMoveDistance extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     driveTrain.arcadeDrive(0, 0);
+    driveTrain.resetEncoders();
   }
 
   // Returns true when the command should end.

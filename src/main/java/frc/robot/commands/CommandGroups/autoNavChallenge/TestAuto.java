@@ -16,7 +16,6 @@ public class TestAuto extends SequentialCommandGroup {
   public TestAuto() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new AutoMoveDistance(360, 0.7), new AutoMoveRotate(-90, 0.7), new AutoMoveDistance(75, 0.7),
-        new AutoMoveRotate(-90, 0.7), new AutoMoveDistance(360, 0.7));
+    addCommands(new AutoMoveDistance(20, 0.7), new AutoMoveRotate(90, 0.7));
   }
 }

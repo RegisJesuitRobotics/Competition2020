@@ -15,15 +15,17 @@ import frc.robot.commands.AutoMoveRotate;
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class Slalomn extends SequentialCommandGroup {
+  private static double distanceSpeed = 0.7;
+  private static double rotateSpeed = 0.7;
   /**
    * Creates a new Slalomn.
    */
   public Slalomn() {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(new AutoMoveDistance(36, 0.5), new AutoMoveRotate(-90, 0.5), new AutoMoveDistance(30, 0.5),
-        new AutoMoveRotate(90, 0.5), new AutoMoveDistance(115, 0.5), new AutoMoveRotate(90, 0.5), new AutoMoveDistance(30, 0.5),
-        new AutoMoveRotate(90, 0.5), new AutoMoveDistance(115, 0.5), new AutoMoveRotate(90, 0.5), new AutoMoveDistance(30, 0.5),
-        new AutoMoveRotate(-90, 0.5), new AutoMoveDistance(36, 0.5));
+    super(new AutoMoveDistance(36, distanceSpeed), new AutoMoveRotate(-90, rotateSpeed), new AutoMoveDistance(40, distanceSpeed),
+        new AutoMoveRotate(90, rotateSpeed), new AutoMoveDistance(115, distanceSpeed), new AutoMoveRotate(90, rotateSpeed), new AutoMoveDistance(40, distanceSpeed),
+        new AutoMoveRotate(90, rotateSpeed), new AutoMoveDistance(115, distanceSpeed), new AutoMoveRotate(90, rotateSpeed), new AutoMoveDistance(40, distanceSpeed),
+        new AutoMoveRotate(-90, rotateSpeed), new AutoMoveDistance(36, distanceSpeed));
   }
 }

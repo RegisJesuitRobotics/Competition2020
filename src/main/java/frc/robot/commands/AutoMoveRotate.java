@@ -34,8 +34,10 @@ public class AutoMoveRotate extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
+  public void initialize() {    
+
     driveTrain.resetEncoders();
+    System.out.println(speed);
     driveTrain.arcadeDrive(0, speed);
   }
 
@@ -49,12 +51,14 @@ public class AutoMoveRotate extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     driveTrain.arcadeDrive(0, 0);
+    driveTrain.resetEncoders();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     // TODO Calculate distance rotated based on incehs calculated by encoders
-    return Math.abs(driveTrain.getDifferenceInEncoderDistance()) >= degrees * 0.55;
+    // pls dont change this number cause its good at 70% 0.49245
+    return Math.abs(driveTrain.getDifferenceInEncoderDistance()) >= degrees * 0.495;
   }
 }

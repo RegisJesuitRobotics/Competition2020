@@ -59,7 +59,7 @@ public class Robot extends TimedRobot {
 
     m_oi = new OI();
 
-    ballSensor = new DigitalInput(1);
+    ballSensor = new DigitalInput(9);
     
     SmartDashboard.putData("Auto mode", m_chooser);
 
@@ -108,7 +108,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Valid Target?", TVboolean);
     SmartDashboard.putNumber("Encoder distance", m_DriveTrain.getAverageEncoderDistance());
     SmartDashboard.putNumber("Encoder differance", m_DriveTrain.getDifferenceInEncoderDistance());
-    // System.out.println("TOTAL CURRENT: " + PDP.getTotalCurrent());
+    SmartDashboard.putNumber("Gyro rotate", m_DriveTrain.getGyro().getRotation2d().getDegrees());
   }
 
   @Override

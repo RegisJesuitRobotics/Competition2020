@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Enums.DirectionEnum;
+import frc.robot.commands.AutoMoveDistance;
 import frc.robot.commands.AutoMoveRotate;
 import frc.robot.commands.CommandGroups.IntakeBall;
 import frc.robot.commands.CommandGroups.ShootSequence;
@@ -71,7 +72,7 @@ public class OI {
     buttonSquare.whileHeld(new IntakeDrop(Enums.IntakeDirection.FORWARD));
     buttonTriangle.whileHeld(new IntakeDrop(Enums.IntakeDirection.REVERSE));
 
-    buttonOptions.toggleWhenPressed(new AutoMoveRotate(720, 0.7));
+    buttonOptions.toggleWhenPressed(new TestAuto());
     buttonShare.toggleWhenPressed(new Slalomn());
     // end driver controls
 

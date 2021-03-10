@@ -19,6 +19,7 @@ public class BarrelRace extends SequentialCommandGroup {
    * Creates a new BarrelRace.
    */
   public BarrelRace() {
-    super(new AutoMoveDistance(90, 1), new AutoMoveRotate(90, 0.5));
+    super(new AutoMoveDistance(140, 0.7), new AutoMoveRotate(90, 0.5), new AutoMoveDistance(50, 0.7),
+    new AutoMoveRotate(90, 0.5), new AutoMoveDistance(50, 0.7), new AutoMoveRotate(90, 0.5), new AutoMoveDistance(100, 0.7));
   }
 }
