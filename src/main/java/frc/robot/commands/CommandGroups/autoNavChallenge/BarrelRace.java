@@ -15,11 +15,19 @@ import frc.robot.commands.AutoMoveRotate;
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class BarrelRace extends SequentialCommandGroup {
+  private static double distanceSpeed = 0.7;
+  private static double rotateSpeed = 0.7;
+
   /**
    * Creates a new BarrelRace.
    */
   public BarrelRace() {
-    super(new AutoMoveDistance(140, 0.7), new AutoMoveRotate(90, 0.5), new AutoMoveDistance(50, 0.7),
-    new AutoMoveRotate(90, 0.5), new AutoMoveDistance(50, 0.7), new AutoMoveRotate(90, 0.5), new AutoMoveDistance(100, 0.7));
+    super(new AutoMoveDistance(138, distanceSpeed), new AutoMoveRotate(-85, rotateSpeed),
+        new AutoMoveDistance(53, distanceSpeed), new AutoMoveRotate(-85, rotateSpeed),
+        new AutoMoveDistance(55, distanceSpeed), new AutoMoveRotate(-90, rotateSpeed),
+        new AutoMoveDistance(50, distanceSpeed), new AutoMoveRotate(-75, rotateSpeed),
+        new AutoMoveDistance(110, distanceSpeed), new AutoMoveRotate(90, rotateSpeed),
+        new AutoMoveDistance(55, distanceSpeed), new AutoMoveRotate(80, rotateSpeed),
+        new AutoMoveDistance(50, distanceSpeed), new AutoMoveRotate(10, rotateSpeed));
   }
 }

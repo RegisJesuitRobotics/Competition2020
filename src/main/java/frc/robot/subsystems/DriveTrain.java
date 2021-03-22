@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 
@@ -21,6 +22,9 @@ public class DriveTrain extends SubsystemBase {
   
   private DifferentialDrive differentialDrive;
 
+  private double resetValueLeft = 0.0;
+  private double resetValueRight = 0.0;
+
   public DriveTrain() {
     leftFollower.follow(leftLeader);
     rightFollower.follow(rightLeader);
@@ -29,8 +33,10 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void resetEncoders() {
-    leftLeader.setSelectedSensorPosition(0.0);
-    rightLeader.setSelectedSensorPosition(0.0);
+    resetValueLeft = leftLeader.getSelectedSensorPosition();
+    resetValueRight = rightLeader.getSelectedSensorPosition();
+    SmartDashboard.putNumber("Reset encoder value left", getLeftEncoder());
+    SmartDashboard.putNumber("Reset encdoer value right", getRightEncoder());
   }
 
   public void tankDrive(double leftSpeed, double rightSpeed) {
@@ -38,11 +44,19 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getAverageEncoderDistance() {
-    return ((leftLeader.getSelectedSensorPosition() + -rightLeader.getSelectedSensorPosition()) / 2) * sensorToInchesConstant;
+    return ((getLeftEncoder() + -getRightEncoder()) / 2) * sensorToInchesConstant;
   }
 
   public double getDifferenceInEncoderDistance() {
-    return ((leftLeader.getSelectedSensorPosition() + rightLeader.getSelectedSensorPosition())) * sensorToInchesConstant;
+    return ((getLeftEncoder() + getRightEncoder())) * sensorToInchesConstant;
+  }
+
+  private double getLeftEncoder() {
+    return leftLeader.getSelectedSensorPosition() - resetValueLeft;
+  }
+
+  private double getRightEncoder() {
+    return rightLeader.getSelectedSensorPosition() - resetValueRight;
   }
 
   public double getGyroAngle() {

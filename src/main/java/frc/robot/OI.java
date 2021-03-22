@@ -15,6 +15,7 @@ import frc.robot.commands.AutoMoveDistance;
 import frc.robot.commands.AutoMoveRotate;
 import frc.robot.commands.CommandGroups.IntakeBall;
 import frc.robot.commands.CommandGroups.ShootSequence;
+import frc.robot.commands.CommandGroups.autoNavChallenge.BarrelRace;
 import frc.robot.commands.CommandGroups.autoNavChallenge.Slalomn;
 import frc.robot.commands.CommandGroups.autoNavChallenge.TestAuto;
 import frc.robot.commands.LimelightStuff.LimeLightDriveAlign;
@@ -23,10 +24,8 @@ import frc.robot.commands.LimelightStuff.LimeLightShooterAlignClose;
 import frc.robot.commands.ShooterManual.Belt;
 import frc.robot.commands.ShooterManual.IntakeDrop;
 import frc.robot.commands.ShooterManual.IntakeRun;
-//import frc.robot.commands.ShooterManual.IntakeRun;
 import frc.robot.commands.ShooterManual.ShooterAim;
 import frc.robot.commands.ShooterManual.ShooterShoot;
-//import frc.robot.commands.ShooterManual.IntakeDrop;
 
 public class OI {
   // DRIVER CONTROLLER
@@ -72,7 +71,7 @@ public class OI {
     buttonSquare.whileHeld(new IntakeDrop(Enums.IntakeDirection.FORWARD));
     buttonTriangle.whileHeld(new IntakeDrop(Enums.IntakeDirection.REVERSE));
 
-    buttonOptions.toggleWhenPressed(new TestAuto());
+    buttonOptions.toggleWhenPressed(new BarrelRace());
     buttonShare.toggleWhenPressed(new Slalomn());
     // end driver controls
 

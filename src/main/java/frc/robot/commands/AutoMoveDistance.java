@@ -7,6 +7,9 @@
 
 package frc.robot.commands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.DriveTrain;
@@ -15,6 +18,10 @@ public class AutoMoveDistance extends CommandBase {
   /**
    * Creates a new AutoMoveDistance.
    */
+
+  public static List<Double> startingDistances = new ArrayList<Double>();
+  public static List<Double> endingDistances = new ArrayList<Double>();
+
 
   private final double speed;
   private final int inches;
@@ -34,9 +41,9 @@ public class AutoMoveDistance extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("I hit the reset!!!!!!!!!!!!!!!!!!");
     driveTrain.resetEncoders();
     driveTrain.arcadeDrive(speed, 0);
+    startingDistances.add(driveTrain.getAverageEncoderDistance());
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -48,6 +55,7 @@ public class AutoMoveDistance extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    endingDistances.add(driveTrain.getAverageEncoderDistance());
     driveTrain.arcadeDrive(0, 0);
     driveTrain.resetEncoders();
   }
