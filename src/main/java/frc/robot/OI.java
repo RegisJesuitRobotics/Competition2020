@@ -72,7 +72,7 @@ public class OI {
     buttonTriangle.whileHeld(new IntakeDrop(Enums.IntakeDirection.REVERSE));
 
     buttonOptions.toggleWhenPressed(new BarrelRace());
-    buttonShare.toggleWhenPressed(new Slalomn());
+    buttonShare.toggleWhenPressed(new AutoMoveDistance(200, 0.7));
     // end driver controls
 
     // Start Nicks operator controls

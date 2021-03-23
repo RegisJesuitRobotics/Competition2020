@@ -25,9 +25,9 @@ public class BarrelRace extends SequentialCommandGroup {
     super(new AutoMoveDistance(138, distanceSpeed), new AutoMoveRotate(-85, rotateSpeed),
         new AutoMoveDistance(53, distanceSpeed), new AutoMoveRotate(-85, rotateSpeed),
         new AutoMoveDistance(55, distanceSpeed), new AutoMoveRotate(-90, rotateSpeed),
-        new AutoMoveDistance(50, distanceSpeed), new AutoMoveRotate(-75, rotateSpeed),
-        new AutoMoveDistance(110, distanceSpeed), new AutoMoveRotate(90, rotateSpeed),
+        new AutoMoveDistance(47, distanceSpeed), new AutoMoveRotate(-75, rotateSpeed),
+        new AutoMoveDistance(125, distanceSpeed), new AutoMoveRotate(90, rotateSpeed),
         new AutoMoveDistance(55, distanceSpeed), new AutoMoveRotate(80, rotateSpeed),
-        new AutoMoveDistance(50, distanceSpeed), new AutoMoveRotate(10, rotateSpeed));
+        new AutoMoveDistance(50, distanceSpeed), new AutoMoveRotate(110, rotateSpeed));
   }
 }

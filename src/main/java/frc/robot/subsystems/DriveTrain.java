@@ -4,6 +4,7 @@ package frc.robot.subsystems;
 import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -18,7 +19,8 @@ public class DriveTrain extends SubsystemBase {
   private WPI_TalonSRX rightFollower = new WPI_TalonSRX(RobotMap.RIGHT_FRONT_PORT);
 
   private final double sensorToInchesConstant = 0.00095;
-  private final ADIS16448_IMU gyro = new ADIS16448_IMU();
+  private final ADXRS450_Gyro gyro;
+
   
   private DifferentialDrive differentialDrive;
 
@@ -26,6 +28,7 @@ public class DriveTrain extends SubsystemBase {
   private double resetValueRight = 0.0;
 
   public DriveTrain() {
+    gyro = new ADXRS450_Gyro();
     leftFollower.follow(leftLeader);
     rightFollower.follow(rightLeader);
     resetEncoders();
@@ -63,7 +66,7 @@ public class DriveTrain extends SubsystemBase {
     return gyro.getAngle();
   }
 
-  public Gyro getGyro() {
+  public ADXRS450_Gyro getGyro() {
     return gyro;
   }
 

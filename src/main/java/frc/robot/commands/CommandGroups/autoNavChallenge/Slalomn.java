@@ -24,12 +24,16 @@ public class Slalomn extends SequentialCommandGroup {
   public Slalomn() {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(new AutoMoveDistance(36, distanceSpeed), new AutoMoveRotate(-90, rotateSpeed),
-        new AutoMoveDistance(40, distanceSpeed), new AutoMoveRotate(90, rotateSpeed),
-        new AutoMoveDistance(115, distanceSpeed), new AutoMoveRotate(90, rotateSpeed),
-        new AutoMoveDistance(40, distanceSpeed), new AutoMoveRotate(90, rotateSpeed),
-        new AutoMoveDistance(115, distanceSpeed), new AutoMoveRotate(90, rotateSpeed),
+    super(new AutoMoveDistance(36, distanceSpeed), new AutoMoveRotate(90, rotateSpeed),
         new AutoMoveDistance(40, distanceSpeed), new AutoMoveRotate(-90, rotateSpeed),
-        new AutoMoveDistance(36, distanceSpeed));
+        new AutoMoveDistance(115, distanceSpeed), new AutoMoveRotate(-90, rotateSpeed),
+        new AutoMoveDistance(40, distanceSpeed), new AutoMoveRotate(90, rotateSpeed),
+        new AutoMoveDistance(60, distanceSpeed), new AutoMoveRotate(90, rotateSpeed),
+        new AutoMoveDistance(40, distanceSpeed), new AutoMoveRotate(90, rotateSpeed),
+        new AutoMoveDistance(60, distanceSpeed), new AutoMoveRotate(90, rotateSpeed),
+        new AutoMoveDistance(40, distanceSpeed), new AutoMoveRotate(-90, rotateSpeed),
+        new AutoMoveDistance(115, distanceSpeed), new AutoMoveRotate(-90, rotateSpeed),
+        new AutoMoveDistance(40, distanceSpeed), new AutoMoveRotate(90, rotateSpeed),
+        new AutoMoveDistance(50, rotateSpeed));
   }
 }

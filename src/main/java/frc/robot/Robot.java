@@ -74,6 +74,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Sensor value", ballSensor);
     SmartDashboard.putNumberArray("Starting Distances", listToArray(AutoMoveDistance.startingDistances));
     SmartDashboard.putNumberArray("Ending Distances", listToArray(AutoMoveDistance.endingDistances));
+    SmartDashboard.putNumber("Gyro", m_DriveTrain.getGyroAngle());
   }
 
   private Double[] listToArray(List<Double> list) {
