@@ -120,7 +120,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Valid Target?", TVboolean);
     SmartDashboard.putNumber("Encoder distance", m_DriveTrain.getAverageEncoderDistance());
     SmartDashboard.putNumber("Encoder differance", m_DriveTrain.getDifferenceInEncoderDistance());
-    SmartDashboard.putNumber("Gyro rotate", m_DriveTrain.getGyro().getRotation2d().getDegrees());
   }
 
   @Override

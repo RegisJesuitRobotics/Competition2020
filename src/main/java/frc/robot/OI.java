@@ -8,11 +8,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Enums.DirectionEnum;
 import frc.robot.commands.AutoMoveDistance;
-import frc.robot.commands.AutoMoveRotate;
+import frc.robot.commands.AutoMoveToRotation;
 import frc.robot.commands.CommandGroups.IntakeBall;
 import frc.robot.commands.CommandGroups.ShootSequence;
 import frc.robot.commands.CommandGroups.autoNavChallenge.BarrelRace;
@@ -39,6 +40,7 @@ public class OI {
   Button touchPad = new JoystickButton(driverController, 14);
   Button buttonOptions = new JoystickButton(driverController, 10);
   Button buttonShare = new JoystickButton(driverController, 9);
+  Button buttonPlaystation = new JoystickButton(driverController, 13);
   int flag = 0;
 
   // OPERATOR CONTROLLER
@@ -72,7 +74,8 @@ public class OI {
     buttonTriangle.whileHeld(new IntakeDrop(Enums.IntakeDirection.REVERSE));
 
     buttonOptions.toggleWhenPressed(new BarrelRace());
-    buttonShare.toggleWhenPressed(new AutoMoveDistance(200, 0.7));
+    buttonShare.whenPressed(new TestAuto());
+    buttonPlaystation.whenPressed(new InstantCommand(Robot.m_DriveTrain::calibrateAndResetGyro, Robot.m_DriveTrain));
     // end driver controls
 
     // Start Nicks operator controls
@@ -111,4 +114,3 @@ public class OI {
   }
 
 }
-// Sd changes needed in OI, ShootSequence, and Auto

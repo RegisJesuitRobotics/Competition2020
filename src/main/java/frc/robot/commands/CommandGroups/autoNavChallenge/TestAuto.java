@@ -5,8 +5,9 @@
 package frc.robot.commands.CommandGroups.autoNavChallenge;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.AutoMoveDistance;
-import frc.robot.commands.AutoMoveRotate;
+import frc.robot.commands.AutoMoveToRotation;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -16,6 +17,6 @@ public class TestAuto extends SequentialCommandGroup {
   public TestAuto() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new AutoMoveDistance(20, 0.7), new AutoMoveRotate(90, 0.7));
+    addCommands(new AutoMoveToRotation(45, 0.7));
   }
 }

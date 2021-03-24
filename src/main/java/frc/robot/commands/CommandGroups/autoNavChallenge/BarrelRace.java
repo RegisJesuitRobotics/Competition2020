@@ -9,7 +9,7 @@ package frc.robot.commands.CommandGroups.autoNavChallenge;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.AutoMoveDistance;
-import frc.robot.commands.AutoMoveRotate;
+import frc.robot.commands.AutoMoveToRotation;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -22,12 +22,15 @@ public class BarrelRace extends SequentialCommandGroup {
    * Creates a new BarrelRace.
    */
   public BarrelRace() {
-    super(new AutoMoveDistance(138, distanceSpeed), new AutoMoveRotate(-85, rotateSpeed),
-        new AutoMoveDistance(53, distanceSpeed), new AutoMoveRotate(-85, rotateSpeed),
-        new AutoMoveDistance(55, distanceSpeed), new AutoMoveRotate(-90, rotateSpeed),
-        new AutoMoveDistance(47, distanceSpeed), new AutoMoveRotate(-75, rotateSpeed),
-        new AutoMoveDistance(125, distanceSpeed), new AutoMoveRotate(90, rotateSpeed),
-        new AutoMoveDistance(55, distanceSpeed), new AutoMoveRotate(80, rotateSpeed),
-        new AutoMoveDistance(50, distanceSpeed), new AutoMoveRotate(110, rotateSpeed));
+    super(new AutoMoveDistance(138, distanceSpeed), new AutoMoveToRotation(80, rotateSpeed),
+        new AutoMoveDistance(53, distanceSpeed), new AutoMoveToRotation(180, rotateSpeed),
+        new AutoMoveDistance(55, distanceSpeed), new AutoMoveToRotation(270, rotateSpeed),
+        new AutoMoveDistance(39, distanceSpeed), new AutoMoveToRotation(1, rotateSpeed),
+        new AutoMoveDistance(125, distanceSpeed), new AutoMoveToRotation(270, rotateSpeed),
+        new AutoMoveDistance(55, distanceSpeed), new AutoMoveToRotation(180, rotateSpeed),
+        new AutoMoveDistance(50, distanceSpeed), new AutoMoveToRotation(90, rotateSpeed),
+        new AutoMoveDistance(75, distanceSpeed), new AutoMoveToRotation(30, rotateSpeed),
+        new AutoMoveDistance(145, distanceSpeed), new AutoMoveToRotation(270, rotateSpeed),
+        new AutoMoveDistance(300, distanceSpeed));
   }
 }

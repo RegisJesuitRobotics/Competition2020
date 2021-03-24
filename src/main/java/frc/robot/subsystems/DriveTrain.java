@@ -29,6 +29,7 @@ public class DriveTrain extends SubsystemBase {
 
   public DriveTrain() {
     gyro = new ADXRS450_Gyro();
+    gyro.calibrate();
     leftFollower.follow(leftLeader);
     rightFollower.follow(rightLeader);
     resetEncoders();
@@ -40,6 +41,11 @@ public class DriveTrain extends SubsystemBase {
     resetValueRight = rightLeader.getSelectedSensorPosition();
     SmartDashboard.putNumber("Reset encoder value left", getLeftEncoder());
     SmartDashboard.putNumber("Reset encdoer value right", getRightEncoder());
+  }
+
+  public void calibrateAndResetGyro() {
+    gyro.calibrate();
+    gyro.reset();
   }
 
   public void tankDrive(double leftSpeed, double rightSpeed) {
@@ -63,7 +69,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getGyroAngle() {
-    return gyro.getAngle();
+    return gyro.getRotation2d().getDegrees() * -1;
   }
 
   public ADXRS450_Gyro getGyro() {
