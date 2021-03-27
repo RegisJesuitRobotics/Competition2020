@@ -10,6 +10,7 @@ package frc.robot.commands;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.DriveTrain;
@@ -24,17 +25,18 @@ public class AutoMoveDistance extends CommandBase {
 
 
   private final double speed;
-  private final int inches;
   private final DriveTrain driveTrain;
+  private final double requiredUnits;
 
   public AutoMoveDistance(int inches, double speed) {
     addRequirements(Robot.m_DriveTrain);
     this.driveTrain = Robot.m_DriveTrain;
+    inches = (int) (inches / 0.852);
     if (inches < 0) {
       inches = Math.abs(inches);
       speed = speed * -1;
     }
-    this.inches = inches;
+    this.requiredUnits = inches * 909.090;
     this.speed = speed;
   }
 
@@ -43,7 +45,6 @@ public class AutoMoveDistance extends CommandBase {
   public void initialize() {
     driveTrain.resetEncoders();
     driveTrain.arcadeDrive(speed, 0);
-    startingDistances.add(driveTrain.getAverageEncoderDistance());
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -55,14 +56,14 @@ public class AutoMoveDistance extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    endingDistances.add(driveTrain.getAverageEncoderDistance());
     driveTrain.arcadeDrive(0, 0);
+    SmartDashboard.putNumber("End Value", driveTrain.getAverageEncoderDistance());
     driveTrain.resetEncoders();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(driveTrain.getAverageEncoderDistance()) >= inches;
+    return Math.abs(driveTrain.getAverageEncoderDistance()) >= requiredUnits;
   }
 }

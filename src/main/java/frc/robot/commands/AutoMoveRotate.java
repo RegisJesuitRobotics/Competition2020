@@ -12,63 +12,34 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.DriveTrain;
 
-public class AutoMoveToRotation extends CommandBase {
+public class AutoMoveRotate extends CommandBase {
   /**
    * Creates a new AutoMoveRotate.
    */
-  private final double originalSpeed;
+  private static final double MAGIC_VALUE = 326.8425067836;
   private double speed = 0;
   private final int degrees;
+  private double requiredEncoderRotations;
 
   private final DriveTrain driveTrain;
 
-  public AutoMoveToRotation(int degrees, double speed) {
+  public AutoMoveRotate(int degrees, double speed) {
     addRequirements(Robot.m_DriveTrain);
-    this.degrees = toBasicAngle(degrees);
+    requiredEncoderRotations = degrees * MAGIC_VALUE;
+    if (degrees < 0) {
+      speed = speed * -1;
+      degrees = degrees * -1;
+    }
+    this.degrees = degrees;
     this.driveTrain = Robot.m_DriveTrain;
-    this.originalSpeed = speed;
+    this.speed = speed;
   }
 
-  private int toBasicAngle(int angle) {
-    if (angle < 360 && angle > 0) {
-      return angle;
-    }
-    if (angle > -360 && angle < 0) {
-      return 360 + angle;
-    }
-    SmartDashboard.putNumber("basic angle", angle % 360);
-    int newAngle = angle % 360;
-    if (newAngle > -360 && newAngle < 0) {
-      return 360 + newAngle;
-    }
-    return newAngle;
-  }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // Gyro: 10
-    // Goal: 330
-    int basicAngle = toBasicAngle((int) driveTrain.getGyroAngle());
-    // BA = 10
-    if (basicAngle > degrees) {
-      if (basicAngle - degrees <= 180) {
-        this.speed = Math.abs(originalSpeed);
-      } else {
-        this.speed = Math.abs(originalSpeed) * -1;
-      }
-    } else {
-      if (degrees - basicAngle >= 180) {
-        this.speed = Math.abs(originalSpeed);
-      } else {
-        this.speed = Math.abs(originalSpeed) * -1;
-      }
-    }
-    if (Math.abs(toBasicAngle((int) driveTrain.getGyroAngle())) - degrees <= 180) {
-      this.speed = Math.abs(originalSpeed);
-    } else {
-      this.speed = Math.abs(originalSpeed) * -1;
-    }
+    
     SmartDashboard.putNumber("spe", speed);
     SmartDashboard.putNumber("degrees", degrees);
     driveTrain.arcadeDrive(0, speed);
@@ -92,11 +63,9 @@ public class AutoMoveToRotation extends CommandBase {
     // pls dont change this number cause its good at 70% 0.49245
     // return Math.abs(driveTrain.getDifferenceInEncoderDistance()) >= degrees *
     // 0.61;
-    double currentGyro = Math.abs(toBasicAngle((int) driveTrain.getGyroAngle()));
-    SmartDashboard.putNumber("Current Gyro", currentGyro);
-    if (speed > 0) {
-      return currentGyro >= degrees;
+    if (speed < 0) {
+      return driveTrain.getRightEncoderRotations() < requiredEncoderRotations;
     }
-    return currentGyro <= degrees;
+    return driveTrain.getLeftEncoderRotations() > requiredEncoderRotations;
   }
 }

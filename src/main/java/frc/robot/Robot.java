@@ -72,9 +72,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     SmartDashboard.putData("Sensor value", ballSensor);
-    SmartDashboard.putNumberArray("Starting Distances", listToArray(AutoMoveDistance.startingDistances));
-    SmartDashboard.putNumberArray("Ending Distances", listToArray(AutoMoveDistance.endingDistances));
-    SmartDashboard.putNumber("Gyro", m_DriveTrain.getGyroAngle());
+    SmartDashboard.putData("Gyro", m_DriveTrain.getGyro());
+
   }
 
   private Double[] listToArray(List<Double> list) {
@@ -119,7 +118,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("TX", TX);
     SmartDashboard.putBoolean("Valid Target?", TVboolean);
     SmartDashboard.putNumber("Encoder distance", m_DriveTrain.getAverageEncoderDistance());
-    SmartDashboard.putNumber("Encoder differance", m_DriveTrain.getDifferenceInEncoderDistance());
   }
 
   @Override

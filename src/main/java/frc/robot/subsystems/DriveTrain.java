@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -18,8 +19,7 @@ public class DriveTrain extends SubsystemBase {
   private WPI_TalonSRX rightLeader = new WPI_TalonSRX(RobotMap.RIGHT_BACK_PORT);
   private WPI_TalonSRX rightFollower = new WPI_TalonSRX(RobotMap.RIGHT_FRONT_PORT);
 
-  private final double sensorToInchesConstant = 0.00095;
-  private final ADXRS450_Gyro gyro;
+  private final AHRS gyro;
 
   
   private DifferentialDrive differentialDrive;
@@ -28,7 +28,7 @@ public class DriveTrain extends SubsystemBase {
   private double resetValueRight = 0.0;
 
   public DriveTrain() {
-    gyro = new ADXRS450_Gyro();
+    gyro = new AHRS();
     gyro.calibrate();
     leftFollower.follow(leftLeader);
     rightFollower.follow(rightLeader);
@@ -53,11 +53,14 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getAverageEncoderDistance() {
-    return ((getLeftEncoder() + -getRightEncoder()) / 2) * sensorToInchesConstant;
+    return ((getLeftEncoder() + -getRightEncoder()) / 2);
   }
 
-  public double getDifferenceInEncoderDistance() {
-    return ((getLeftEncoder() + getRightEncoder())) * sensorToInchesConstant;
+  public double getLeftEncoderRotations() {
+    return getLeftEncoder();
+  }
+  public double getRightEncoderRotations() {
+    return getRightEncoder();
   }
 
   private double getLeftEncoder() {
@@ -69,10 +72,10 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getGyroAngle() {
-    return gyro.getRotation2d().getDegrees() * -1;
+    return gyro.getFusedHeading();
   }
 
-  public ADXRS450_Gyro getGyro() {
+  public AHRS getGyro() {
     return gyro;
   }
 
