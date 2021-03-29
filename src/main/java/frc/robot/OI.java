@@ -71,7 +71,7 @@ public class OI {
     // buttonTriangle.whileHeld(new IntakeDrop(Enums.IntakeDirection.REVERSE));
 
     buttonOptions.toggleWhenPressed(new TestAuto());
-    buttonShare.whenPressed(new Slalomn());
+    buttonShare.whenPressed(new BarrelRace());
     buttonPlaystation.whenPressed(new InstantCommand(Robot.m_DriveTrain::resetGyro, Robot.m_DriveTrain));
     // end driver controls
 

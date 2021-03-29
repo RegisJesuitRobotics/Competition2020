@@ -9,6 +9,7 @@ package frc.robot.commands.CommandGroups.autoNavChallenge;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.commands.AutoMoveAngleCorrect;
 import frc.robot.commands.AutoMoveDistance;
 import frc.robot.commands.AutoMoveRotate;
 
@@ -45,13 +46,15 @@ public class BarrelRace extends SequentialCommandGroup {
         new WaitCommand(delayTime), 
         new AutoMoveRotate(90, rotateSpeed),
         new WaitCommand(delayTime), 
+        new AutoMoveAngleCorrect(0, 0.3),
+        new WaitCommand(delayTime),
         //5
-        new AutoMoveDistance(146, distanceSpeed), 
+        new AutoMoveDistance(140, distanceSpeed), 
         new WaitCommand(delayTime),
         new AutoMoveRotate(-90, rotateSpeed), 
         new WaitCommand(delayTime), 
         //6
-        new AutoMoveDistance(55, distanceSpeed),
+        new AutoMoveDistance(65, distanceSpeed),
         new WaitCommand(delayTime), 
         new AutoMoveRotate(-90, rotateSpeed), 
         new WaitCommand(delayTime),
@@ -60,23 +63,30 @@ public class BarrelRace extends SequentialCommandGroup {
         new WaitCommand(delayTime), 
         new AutoMoveRotate(-90, rotateSpeed),
         new WaitCommand(delayTime),
-        //8
-        new AutoMoveDistance(120, distanceSpeed), 
+        new AutoMoveAngleCorrect(90, 0.3),
+        new WaitCommand(delayTime),
+        //8ci
+        new AutoMoveDistance(130, distanceSpeed), 
         new WaitCommand(delayTime), 
-        new AutoMoveRotate(-97, rotateSpeed),
+        new AutoMoveRotate(-90, rotateSpeed),
+        new WaitCommand(delayTime),
+        new AutoMoveAngleCorrect(0, 0.3),
         new WaitCommand(delayTime),
         //9
-        new AutoMoveDistance(126, distanceSpeed),
+        new AutoMoveDistance(118, distanceSpeed),
         new WaitCommand(delayTime),
         new AutoMoveRotate(-90, rotateSpeed),
         new WaitCommand(delayTime),
         //10
-        new AutoMoveDistance(60, distanceSpeed),
+        new AutoMoveDistance(55, distanceSpeed),
         new WaitCommand(delayTime),
         new AutoMoveRotate(-90, rotateSpeed),
         new WaitCommand(delayTime),
+        new AutoMoveAngleCorrect(180, 0.3),
+        new WaitCommand(delayTime),
         //11
-        new AutoMoveDistance(270, distanceSpeed)
+        new AutoMoveDistance(340, distanceSpeed),
+        new AutoMoveRotate(360, rotateSpeed)
 
         );
   }

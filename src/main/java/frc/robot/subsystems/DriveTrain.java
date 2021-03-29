@@ -1,16 +1,14 @@
 
 package frc.robot.subsystems;
 
-import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
+import frc.robot.utils.Util;
 
 public class DriveTrain extends SubsystemBase {
 
@@ -71,9 +69,14 @@ public class DriveTrain extends SubsystemBase {
     return rightLeader.getSelectedSensorPosition() - resetValueRight;
   }
 
-  public double getGyroAngle() {
-    return gyro.getFusedHeading();
+  public int getGyroHeading() {
+    return Util.simplifyAngle((int) gyro.getAngle());
   }
+
+  public double getGyroAngle() {
+    return gyro.getAngle();
+  }
+  
 
   public AHRS getGyro() {
     return gyro;
