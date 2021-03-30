@@ -9,13 +9,16 @@ import org.junit.Test;
 public class UtilTest {
     @Test
     public void testSimplifyAngle() {
-        assertEquals(0, Util.simplifyAngle(0));
-        assertEquals(0, Util.simplifyAngle(360));
-        assertEquals(0, Util.simplifyAngle(720));
-        assertEquals(90, Util.simplifyAngle(90));
-        assertEquals(90, Util.simplifyAngle(450));
-        assertEquals(270, Util.simplifyAngle(-90));
-        assertEquals(270, Util.simplifyAngle(-450));
+        assertEquals(0, Util.simplifyAngle(0.0), 0);
+        assertEquals(0, Util.simplifyAngle(360), 0);
+        assertEquals(0, Util.simplifyAngle(720), 0);
+        assertEquals(90, Util.simplifyAngle(90), 0);
+        assertEquals(90, Util.simplifyAngle(450), 0);
+        assertEquals(270, Util.simplifyAngle(-90), 0);
+        assertEquals(270, Util.simplifyAngle(-450), 0);
+        assertEquals(0.5, Util.simplifyAngle(0.5), 0);
+        assertEquals(0.5, Util.simplifyAngle(360.5), 0);
+
     }
 
     @Test
@@ -48,8 +51,11 @@ public class UtilTest {
         assertTrue(Util.isInAngleRange(350, 60, -0));
         assertTrue(Util.isInAngleRange(60, 180, 180));
 
-        assertFalse(Util.isInAngleRange(60, 90, 90));
-        assertFalse(Util.isInAngleRange(359, 60, 60));
+        assertTrue(Util.isInAngleRange(60, 90, 90));
+        assertTrue(Util.isInAngleRange(359, 60, 60));
         assertTrue(Util.isInAngleRange(330, 0, 330));
+        assertTrue(Util.isInAngleRange(350, 40, 353));
+
+        assertTrue(Util.isInAngleRange(349, 40.399, 40.399));
     }
 }

@@ -9,6 +9,7 @@ package frc.robot.commands.CommandGroups.autoNavChallenge;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.commands.AutoMoveAngleCorrect;
 import frc.robot.commands.AutoMoveDistance;
 import frc.robot.commands.AutoMoveRotate;
 
@@ -28,7 +29,7 @@ public class Slalomn extends SequentialCommandGroup {
     // super(new FooCommand(), new BarCommand());
     super(
       //1
-        new AutoMoveDistance(36, distanceSpeed), 
+        new AutoMoveDistance(40, distanceSpeed), 
         new WaitCommand(delayTime), 
         new AutoMoveRotate(-90, rotateSpeed),
         new WaitCommand(delayTime),
@@ -37,13 +38,15 @@ public class Slalomn extends SequentialCommandGroup {
         new WaitCommand(delayTime), 
         new AutoMoveRotate(90, rotateSpeed),
         new WaitCommand(delayTime),
+        new AutoMoveAngleCorrect(0, 0.3),
+        new WaitCommand(delayTime),
         //3
         new AutoMoveDistance(188, distanceSpeed),
         new WaitCommand(delayTime), 
         new AutoMoveRotate(90, rotateSpeed),
         new WaitCommand(delayTime),
         //4
-        new AutoMoveDistance(50, distanceSpeed),
+        new AutoMoveDistance(60, distanceSpeed),
         new WaitCommand(delayTime), 
         new AutoMoveRotate(-90, rotateSpeed),
         new WaitCommand(delayTime),
@@ -63,9 +66,11 @@ public class Slalomn extends SequentialCommandGroup {
         new AutoMoveRotate(-90, rotateSpeed),
         new WaitCommand(delayTime),
         //8
-        new AutoMoveDistance(50, distanceSpeed), 
+        new AutoMoveDistance(60, distanceSpeed), 
         new WaitCommand(delayTime), 
         new AutoMoveRotate(90, rotateSpeed),
+        new WaitCommand(delayTime),
+        new AutoMoveAngleCorrect(180, 0.3),
         new WaitCommand(delayTime),
         //9
         new AutoMoveDistance(180, distanceSpeed), 

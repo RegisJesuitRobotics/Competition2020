@@ -12,15 +12,19 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Enums.DirectionEnum;
+import frc.robot.commands.AutoMoveAngleCorrect;
+import frc.robot.commands.AutoMoveToCompassHeading;
 import frc.robot.commands.CommandGroups.IntakeBall;
 import frc.robot.commands.CommandGroups.ShootSequence;
 import frc.robot.commands.CommandGroups.autoNavChallenge.BarrelRace;
+import frc.robot.commands.CommandGroups.autoNavChallenge.Bounce;
 import frc.robot.commands.CommandGroups.autoNavChallenge.Slalomn;
 import frc.robot.commands.CommandGroups.autoNavChallenge.TestAuto;
 import frc.robot.commands.LimelightStuff.LimeLightDriveAlign;
 import frc.robot.commands.LimelightStuff.LimeLightShooterAlign;
 import frc.robot.commands.LimelightStuff.LimeLightShooterAlignClose;
 import frc.robot.commands.ShooterManual.Belt;
+import frc.robot.commands.ShooterManual.IntakeDrop;
 import frc.robot.commands.ShooterManual.IntakeRun;
 import frc.robot.commands.ShooterManual.ShooterAim;
 import frc.robot.commands.ShooterManual.ShooterShoot;
@@ -32,8 +36,8 @@ public class OI {
   Button buttonX = new JoystickButton(driverController, 2);
   Button buttonSquare = new JoystickButton(driverController, 1);
   Button buttonTriangle = new JoystickButton(driverController, 4);
-  Button buttonLeftBumper = new JoystickButton(driverController, 7);
-  Button buttonRightBumper = new JoystickButton(driverController, 8);
+  Button buttonLeftBumper = new JoystickButton(driverController, 5);
+  Button buttonRightBumper = new JoystickButton(driverController, 6);
   Button touchPad = new JoystickButton(driverController, 14);
   Button buttonOptions = new JoystickButton(driverController, 10);
   Button buttonShare = new JoystickButton(driverController, 9);
@@ -67,11 +71,11 @@ public class OI {
     // Start Driver controls
     buttonCircle.whileHeld(new IntakeRun(-0.7));
     buttonX.whileHeld(new IntakeRun(0.7));
-    // buttonSquare.whileHeld(new IntakeDrop(Enums.IntakeDirection.FORWARD));
-    // buttonTriangle.whileHeld(new IntakeDrop(Enums.IntakeDirection.REVERSE));
-
+    buttonSquare.whileHeld(new IntakeDrop(Enums.IntakeDirection.FORWARD));
+    buttonTriangle.whileHeld(new IntakeDrop(Enums.IntakeDirection.REVERSE));
+    buttonLeftBumper.whenPressed(new AutoMoveAngleCorrect(245, 0.4));
     buttonOptions.toggleWhenPressed(new TestAuto());
-    buttonShare.whenPressed(new BarrelRace());
+    buttonShare.whenPressed(new Bounce());
     buttonPlaystation.whenPressed(new InstantCommand(Robot.m_DriveTrain::resetGyro, Robot.m_DriveTrain));
     // end driver controls
 

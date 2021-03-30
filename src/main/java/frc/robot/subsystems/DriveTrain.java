@@ -2,12 +2,12 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
+import frc.robot.utils.AHRS3729;
 import frc.robot.utils.Util;
 
 public class DriveTrain extends SubsystemBase {
@@ -17,7 +17,7 @@ public class DriveTrain extends SubsystemBase {
   private WPI_TalonSRX rightLeader = new WPI_TalonSRX(RobotMap.RIGHT_BACK_PORT);
   private WPI_TalonSRX rightFollower = new WPI_TalonSRX(RobotMap.RIGHT_FRONT_PORT);
 
-  private final AHRS gyro;
+  private final AHRS3729 gyro;
 
   
   private DifferentialDrive differentialDrive;
@@ -26,7 +26,7 @@ public class DriveTrain extends SubsystemBase {
   private double resetValueRight = 0.0;
 
   public DriveTrain() {
-    gyro = new AHRS();
+    gyro = new AHRS3729();
     gyro.calibrate();
     leftFollower.follow(leftLeader);
     rightFollower.follow(rightLeader);
@@ -69,8 +69,12 @@ public class DriveTrain extends SubsystemBase {
     return rightLeader.getSelectedSensorPosition() - resetValueRight;
   }
 
-  public int getGyroHeading() {
-    return Util.simplifyAngle((int) gyro.getAngle());
+  public double getGyroHeading() {
+    return Util.simplifyAngle(gyro.getAngle());
+  }
+
+  public double getCompassHeading() {
+    return gyro.getFusedHeading();
   }
 
   public double getGyroAngle() {
@@ -78,7 +82,7 @@ public class DriveTrain extends SubsystemBase {
   }
   
 
-  public AHRS getGyro() {
+  public AHRS3729 getGyro() {
     return gyro;
   }
 

@@ -15,7 +15,7 @@ public class IntakeDrop extends CommandBase {
   Enums.IntakeDirection direction;
   public IntakeDrop(Enums.IntakeDirection m_direction) {
     // Use requires() here to declare subsystem dependencies
-    addRequirements(Robot.m_UpAndDown);
+    addRequirements(Robot.m_IntakeBar);
     direction = m_direction;
   }
 

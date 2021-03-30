@@ -8,7 +8,7 @@ public class Util {
      * @param originalAngle the angle to simplify
      * @return the simplified angle
      */
-    public static int simplifyAngle(int originalAngle) {
+    public static double simplifyAngle(double originalAngle) {
         if (originalAngle > 0) {
             return originalAngle % 360;
         } else if (originalAngle < 0) {
@@ -51,7 +51,10 @@ public class Util {
             if (angle >= range1) {
                 return true;
             }
-            return angle >= 0 && angle < range2;
+            if (angle <= range2) {
+                return true;
+            }
+            return (angle >= 0 && angle < range2) || (angle < 360 && angle > range1);
         }
         return angle >= range1 && angle <= range2;
     }

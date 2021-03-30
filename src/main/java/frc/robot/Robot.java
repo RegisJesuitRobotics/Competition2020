@@ -8,12 +8,12 @@
 package frc.robot;
 
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.commands.AutoMoveDistance;
 import frc.robot.commands.Drive;
 import frc.robot.commands.CommandGroups.Auto;
 import frc.robot.subsystems.BeltOnly;
@@ -24,8 +24,6 @@ import frc.robot.subsystems.IntakeBar;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
-import java.util.List;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -38,6 +36,7 @@ public class Robot extends TimedRobot {
   public static BeltOnly m_BeltOnly = new BeltOnly();
   public static UpAndDown m_UpAndDown = new UpAndDown();
   public static IntakeBar m_IntakeBar = new IntakeBar();
+  public static Compressor compresor;
   // read values periodically
   NetworkTableInstance instance = NetworkTableInstance.getDefault();
   NetworkTable table = instance.getTable("limelight-limeboi");
@@ -64,6 +63,9 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
 
     ballSensor = new DigitalInput(9);
+
+    compresor = new Compressor();
+    compresor.getPressureSwitchValue();
     
     SmartDashboard.putData("Auto mode", m_chooser);
 
@@ -71,14 +73,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    SmartDashboard.putData("Sensor value", ballSensor);
     SmartDashboard.putData("Gyro", m_DriveTrain.getGyro());
-
-  }
-
-  private Double[] listToArray(List<Double> list) {
-    Double[] array = new Double[list.size()];
-    return list.toArray(array);
   }
 
   @Override
