@@ -6,7 +6,6 @@ package frc.robot.commands.CommandGroups.autoNavChallenge;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.commands.AutoMoveAngleCorrect;
 import frc.robot.commands.AutoMoveDistance;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more

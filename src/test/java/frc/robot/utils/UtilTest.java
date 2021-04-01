@@ -1,7 +1,6 @@
 package frc.robot.utils;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -36,7 +35,6 @@ public class UtilTest {
         
         assertEquals(1, Util.getFastestDirection(359, 1));
         assertEquals(-1, Util.getFastestDirection(1, 359));
-        assertEquals(-1, Util.getFastestDirection(179, 359));
         assertEquals(1, Util.getFastestDirection(180, 359));
 
         assertEquals(1, Util.getFastestDirection(359.999, 60));

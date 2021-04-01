@@ -1,10 +1,12 @@
 package frc.robot.utils;
 
 public class Util {
-    private Util() {}
+    private Util() {
+    }
 
     /**
      * This will take any number -infinity to infinity and simplify it to 0-359
+     * 
      * @param originalAngle the angle to simplify
      * @return the simplified angle
      */
@@ -16,34 +18,40 @@ public class Util {
         }
         return 0;
     }
+
     /**
      * Gets the fastest direction to get from one angle to another
-     * @param originalAngle 0-359
+     * 
+     * @param originalAngle    0-359
      * @param destinationAngle 0-359
      * @return -1 or 1
      */
     public static int getFastestDirection(double originalAngle, double destinationAngle) {
-        System.out.println(originalAngle);
-        System.out.println(destinationAngle);
-        double difference1 = originalAngle - destinationAngle;
-        double difference2 = destinationAngle - originalAngle;
-        if (difference2 < 180 && difference2 >= 0) {
+        double angleDifference = destinationAngle - originalAngle;
+        if (angleDifference <= 180 && angleDifference > 0) {
             return 1;
         }
-        if (difference1 < 180 && difference1 >= 0) {
+        if (angleDifference >= 180 && angleDifference > 0) {
             return -1;
         }
-        if (difference1 < difference2) {
+
+        // Passes zero
+        if (angleDifference <= -180 && angleDifference < 0) {
+            return 1;
+        }
+        if (angleDifference >= -180 && angleDifference < 0) {
             return -1;
         }
+
         return 1;
     }
 
     /**
      * calculates if an angle is within a given range
+     * 
      * @param range1 the first parameter of the range
      * @param range2 the second parameter of the range
-     * @param angle the angle to calculate with
+     * @param angle  the angle to calculate with
      * @return if it is in the angle
      */
     public static boolean isInAngleRange(double range1, double range2, double angle) {
