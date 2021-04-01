@@ -33,36 +33,42 @@ public class Bounce extends SequentialCommandGroup {
       //3
       new AutoMoveDistance(-35, distanceSpeed),
       new WaitCommand(delayTime),   
-      new AutoMoveAngleCorrect(245, 0.4),
+      new AutoMoveRotate(-15, 0.35),
       new WaitCommand(0.3),
       //4
       new AutoMoveDistance(-153, distanceSpeed),
       new WaitCommand(delayTime),
-      new AutoMoveAngleCorrect(276, 0.4),
+      new AutoMoveRotate(15, 0.35),
+      new WaitCommand(0.3),
+      new AutoMoveAngleCorrect(270, 0.3),
       new WaitCommand(0.3),
       //5
       new AutoMoveDistance(163, distanceSpeed),
       new WaitCommand(delayTime),
       //6
-      new AutoMoveDistance(-108, distanceSpeed),
+      new AutoMoveDistance(-118, distanceSpeed),
       new WaitCommand(delayTime),
-      new AutoMoveAngleCorrect(355, 0.4),
+      new AutoMoveRotate(80, 0.35),
+      new WaitCommand(0.3),
+      new AutoMoveAngleCorrect(0, 0.35),
       new WaitCommand(0.3),
       //7 
       new AutoMoveDistance(90, distanceSpeed),
       new WaitCommand(delayTime),
-      new AutoMoveAngleCorrect(270, 0.4),
+      new AutoMoveRotate(-85, 0.35),
       new WaitCommand(delayTime),
+      new AutoMoveAngleCorrect(270, 0.35),
+      new WaitCommand(0.3),
       //8
-      new AutoMoveDistance(133, distanceSpeed),
+      new AutoMoveDistance(117, distanceSpeed),
       new WaitCommand(delayTime),
       //9
       new AutoMoveDistance(-62, distanceSpeed),
       new WaitCommand(delayTime),
-      new AutoMoveAngleCorrect(0, 0.4),
+      new AutoMoveRotate(70, rotateSpeed),
       new WaitCommand(0.3),
       //10
-      new AutoMoveDistance(80, distanceSpeed)
+      new AutoMoveDistance(25, distanceSpeed)
 
     );
   }

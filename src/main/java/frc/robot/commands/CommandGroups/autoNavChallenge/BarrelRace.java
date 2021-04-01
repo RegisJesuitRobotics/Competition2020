@@ -19,7 +19,7 @@ import frc.robot.commands.AutoMoveRotate;
 public class BarrelRace extends SequentialCommandGroup {
   private static double distanceSpeed = 0.7;
   private static double rotateSpeed = 0.7;
-  private static double delayTime = 0.5;
+  private static double delayTime = 1;
 
   /**
    * Creates a new BarrelRace.
