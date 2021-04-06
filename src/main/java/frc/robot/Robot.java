@@ -16,6 +16,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.commands.Drive;
 import frc.robot.commands.CommandGroups.Auto;
+import frc.robot.commands.CommandGroups.autoNavChallenge.BarrelRace;
+import frc.robot.commands.CommandGroups.autoNavChallenge.Bounce;
+import frc.robot.commands.CommandGroups.autoNavChallenge.GalacticSearch;
+import frc.robot.commands.CommandGroups.autoNavChallenge.GalacticSearchARed;
+import frc.robot.commands.CommandGroups.autoNavChallenge.GalacticSearchPickupRun;
+import frc.robot.commands.CommandGroups.autoNavChallenge.Slalomn;
+import frc.robot.commands.CommandGroups.autoNavChallenge.GalacticSearch.Routes;
 import frc.robot.subsystems.BeltOnly;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ShootWheels;
@@ -56,7 +63,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_DriveTrain.setDefaultCommand(new Drive());
-    m_autonomousCommand = new Auto();
     
     PDP = new PowerDistributionPanel();
 
@@ -66,6 +72,11 @@ public class Robot extends TimedRobot {
 
     compresor = new Compressor();
     compresor.getPressureSwitchValue();
+
+    m_chooser.addOption("Barrel Race", new BarrelRace());;
+    m_chooser.addOption("Slalomn", new Slalomn());
+    m_chooser.addOption("Bounce", new Bounce());
+    m_chooser.addOption("Galactic Search", new GalacticSearch(this));
     
     SmartDashboard.putData("Auto mode", m_chooser);
 
@@ -87,24 +98,25 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
+    if (m_chooser.getSelected() != null) {
+      m_chooser.getSelected().schedule();
     }
   }
 
   @Override
   public void autonomousPeriodic() {
     CommandScheduler.getInstance().run();
-    SmartDashboard.putNumber("TY(shoots best if between -10 and -11)", TY);
-    SmartDashboard.putNumber("TX(shoots best if between -1 and 1)", TX);
-    SmartDashboard.putBoolean("Valid Target?", TVboolean);
+    // SmartDashboard.putNumber("TY(shoots best if between -10 and -11)", TY);
+    // SmartDashboard.putNumber("TX(shoots best if between -1 and 1)", TX);
+    // SmartDashboard.putBoolean("Valid Target?", TVboolean);
 
   }
 
   @Override
   public void teleopInit() {
-    m_autonomousCommand.cancel();
-  }
+    if (m_chooser.getSelected() != null) {
+      m_chooser.getSelected().cancel();
+    }  }
 
   @Override
   public void teleopPeriodic() {
@@ -113,6 +125,20 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("TX", TX);
     SmartDashboard.putBoolean("Valid Target?", TVboolean);
     SmartDashboard.putNumber("Encoder distance", m_DriveTrain.getAverageEncoderDistance());
+  }
+  
+  public Routes getRoute() {
+    double heading = m_DriveTrain.getCompassHeading();
+    if (heading > 25 && heading < 40) {
+      return Routes.REDA;
+    } 
+    if (heading > 350 || heading < 10) {
+      return Routes.BLUEA;
+    }
+    if (heading > 300 && heading < 320) {
+      return Routes.REDB;
+    }
+    return Routes.BLUEB;
   }
 
   @Override

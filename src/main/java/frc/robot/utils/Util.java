@@ -54,16 +54,20 @@ public class Util {
      * @param angle  the angle to calculate with
      * @return if it is in the angle
      */
-    public static boolean isInAngleRange(double range1, double range2, double angle) {
-        if (range1 > range2) {
-            if (angle >= range1) {
-                return true;
+    public static boolean isInAngleRange(double rangeAngle1, double rangeAngle2, double angle) {
+        double difference = rangeAngle1 - rangeAngle2;
+
+        if (Math.abs(difference) > 180) {
+            // Passes 0
+            if (rangeAngle1 > rangeAngle2) {
+                return rangeAngle1 <= angle || rangeAngle2 >= angle;
             }
-            if (angle <= range2) {
-                return true;
-            }
-            return (angle >= 0 && angle < range2) || (angle < 360 && angle > range1);
+            return rangeAngle2 <= angle || rangeAngle1 >= angle;
         }
-        return angle >= range1 && angle <= range2;
+        if (rangeAngle1 < rangeAngle2) {
+            return angle >= rangeAngle1 && angle <= rangeAngle2;
+        }
+        return angle >= rangeAngle2 && angle <= rangeAngle1;
+
     }
 }

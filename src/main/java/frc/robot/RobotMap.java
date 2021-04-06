@@ -52,4 +52,8 @@ public class RobotMap {
   public static final int INTAKE_DROP_PORT = 42069;
   public static final int INTAKE_BAR_PORT = 6;
 
+
+  // public static final double ksVolts = 0.613;
+  // public static final double kvVoltsSquared = 0.0259;
+
 }

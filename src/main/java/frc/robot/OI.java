@@ -16,6 +16,11 @@ import frc.robot.commands.AutoMoveAngleCorrect;
 import frc.robot.commands.CommandGroups.IntakeBall;
 import frc.robot.commands.CommandGroups.ShootSequence;
 import frc.robot.commands.CommandGroups.autoNavChallenge.Bounce;
+import frc.robot.commands.CommandGroups.autoNavChallenge.GalacticSearchABlue;
+import frc.robot.commands.CommandGroups.autoNavChallenge.GalacticSearchARed;
+import frc.robot.commands.CommandGroups.autoNavChallenge.GalacticSearchBBlue;
+import frc.robot.commands.CommandGroups.autoNavChallenge.GalacticSearchBRed;
+import frc.robot.commands.CommandGroups.autoNavChallenge.GalacticSearchPickupRun;
 import frc.robot.commands.CommandGroups.autoNavChallenge.TestAuto;
 import frc.robot.commands.LimelightStuff.LimeLightDriveAlign;
 import frc.robot.commands.LimelightStuff.LimeLightShooterAlign;
@@ -72,7 +77,7 @@ public class OI {
     buttonTriangle.whileHeld(new IntakeDrop(Enums.IntakeDirection.REVERSE));
     buttonLeftBumper.whenPressed(new AutoMoveAngleCorrect(245, 0.4));
     buttonOptions.toggleWhenPressed(new TestAuto());
-    buttonShare.whenPressed(new Bounce());
+    buttonShare.whenPressed(new GalacticSearchPickupRun(new GalacticSearchBBlue()));
     buttonPlaystation.whenPressed(new InstantCommand(Robot.m_DriveTrain::resetGyro, Robot.m_DriveTrain));
     // end driver controls
 

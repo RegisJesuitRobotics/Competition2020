@@ -17,6 +17,7 @@ import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
 
 import frc.robot.Enums;
 import frc.robot.RobotMap;
+import frc.robot.Enums.IntakeDirection;
 
 public class IntakeBar extends SubsystemBase {
   private CANSparkMax intakeSparkMax = new CANSparkMax(RobotMap.INTAKE_BAR_PORT, MotorType.kBrushless);
@@ -24,6 +25,10 @@ public class IntakeBar extends SubsystemBase {
 
   public void intakeRun(double motorSpeed) {
     intakeSparkMax.set(motorSpeed);
+  }
+
+  public void releaseIntakeMove() {
+    intakeMove(IntakeDirection.REVERSE);
   }
 
   public void intakeMove(Enums.IntakeDirection direction) {

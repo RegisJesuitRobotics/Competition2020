@@ -4,22 +4,24 @@
 
 package frc.robot.commands.CommandGroups.autoNavChallenge;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.commands.AutoMoveAngleCorrect;
-import frc.robot.commands.AutoMoveDistance;
-import frc.robot.commands.AutoMoveRotate;
+import java.util.Map;
+
+import edu.wpi.first.wpilibj2.command.SelectCommand;
+import frc.robot.Robot;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class GalacticSearch extends SequentialCommandGroup {
+public class GalacticSearch extends SelectCommand {
+  public enum Routes {
+    REDA, REDB, BLUEA, BLUEB;
+  }
+
   /** Creates a new GalacticSearch. */
-  public GalacticSearch() {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      
-    );
+  public GalacticSearch(Robot robot) {
+    super(Map.ofEntries(Map.entry(Routes.REDA, new GalacticSearchReleaseAndStart(new GalacticSearchARed())),
+        Map.entry(Routes.REDB, new GalacticSearchReleaseAndStart(new GalacticSearchBRed())),
+        Map.entry(Routes.BLUEA, new GalacticSearchReleaseAndStart(new GalacticSearchABlue())),
+        Map.entry(Routes.BLUEB, new GalacticSearchReleaseAndStart(new GalacticSearchBBlue()))), robot::getRoute);
   }
 }
