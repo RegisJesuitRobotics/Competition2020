@@ -40,7 +40,6 @@ public class Auto extends SequentialCommandGroup {
       new Belt(-1).withTimeout(4),
       new ShooterShoot(0).withTimeout(0.5),
       new AutoMove(0.4, 0.4, 0.4, 0.4).withTimeout(0.6)
-
     );
 
   }

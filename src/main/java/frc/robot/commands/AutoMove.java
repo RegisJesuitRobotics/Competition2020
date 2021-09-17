@@ -13,11 +13,11 @@ import frc.robot.Robot;
 public class AutoMove extends CommandBase {
   double m_leftFrontSpeed, m_leftBackSpeed, m_rightFrontSpeed, m_rightBackSpeed;
 
-  public AutoMove(double lfspeed, double lbspeed, double rfspeed, double rbspeed) {
-    m_leftFrontSpeed = lfspeed;
-    m_leftBackSpeed = lbspeed;
-    m_rightFrontSpeed = rfspeed;
-    m_rightBackSpeed = rbspeed;
+  public AutoMove(double leftFrontSpeed, double leftBackSpeed, double rightFrontSpeed, double rightBackSpeed) {
+    m_leftFrontSpeed = leftFrontSpeed;
+    m_leftBackSpeed = leftBackSpeed;
+    m_rightFrontSpeed = rightFrontSpeed;
+    m_rightBackSpeed = rightBackSpeed;
     addRequirements(Robot.m_DriveTrain);
 
   }
