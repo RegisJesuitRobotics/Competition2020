@@ -17,9 +17,9 @@ import frc.robot.RobotMap;
 
 public class ColorWheel extends SubsystemBase {
 
-  private CANSparkMax colorWheelMotor = new CANSparkMax(RobotMap.COLOR_WHEEL_MOTOR_PORT, MotorType.kBrushless);
+  private final CANSparkMax colorWheelMotor = new CANSparkMax(RobotMap.COLOR_WHEEL_MOTOR_PORT, MotorType.kBrushless);
 
-  private DoubleSolenoid spinnerSolenoid = new DoubleSolenoid(3, 4);
+  private final DoubleSolenoid spinnerSolenoid = new DoubleSolenoid(3, 4);
 
   public void spinMotor(double spinSpeed) {
     colorWheelMotor.set(spinSpeed);
