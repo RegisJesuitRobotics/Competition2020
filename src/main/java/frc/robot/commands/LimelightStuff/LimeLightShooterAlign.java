@@ -52,22 +52,19 @@ public class LimeLightShooterAlign extends CommandBase {
       }
     }
     if (TVboolean) {
-      System.out.println("You have a valid target");
       if (ty.getDouble(0.0) > -10.5 - m_max) {
         // go up
         SmartDashboard.putString("Shooter Align Status", "UP");
 
-        Robot.m_UpAndDown.aim(-0.5);
-      } else if (ty.getDouble(0.0) < -11.5 - m_max) {
+        Robot.m_UpAndDown.aim(-0.2);
+      } else if (ty.getDouble(0.0) < -12.5 - m_max) {
         // go down
         SmartDashboard.putString("Shooter Align Status", "DOWN");
-        Robot.m_UpAndDown.aim(0.22);
+        Robot.m_UpAndDown.aim(0.15);
       } else {
         SmartDashboard.putString("Shooter Align Status", "STOPPED");
         Robot.m_UpAndDown.aim(0);
       }
-    } else {
-      System.out.println("You do not hava a valid target");
     }
   }
 

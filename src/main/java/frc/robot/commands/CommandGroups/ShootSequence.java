@@ -14,6 +14,6 @@ public class ShootSequence extends ParallelCommandGroup {
 
   public ShootSequence() {
 
-    super(new ShooterShoot(0.1), new BeltWithWait(2, 0.5));
+    super(new ShooterShoot(0.8), new BeltWithWait(0.75, -0.8));
   }
 }

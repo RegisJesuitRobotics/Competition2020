@@ -7,79 +7,64 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj2.command.button.Button;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import frc.robot.Enums.DirectionEnum;
-import frc.robot.commands.ClimberDeploy;
+import frc.robot.Enums.IntakeDirection;
+import frc.robot.commands.CommandGroups.ShootSequence;
 import frc.robot.commands.LimelightStuff.LimeLightDriveAlign;
 import frc.robot.commands.LimelightStuff.LimeLightShooterAlign;
 import frc.robot.commands.ShooterManual.Belt;
+import frc.robot.commands.ShooterManual.IntakeBall;
 import frc.robot.commands.ShooterManual.IntakeDrop;
-import frc.robot.commands.ShooterManual.IntakeRun;
 //import frc.robot.commands.ShooterManual.IntakeRun;
 import frc.robot.commands.ShooterManual.ShooterAim;
 import frc.robot.commands.ShooterManual.ShooterShoot;
-//import frc.robot.commands.ShooterManual.IntakeDrop;
+import frc.robot.utils.PlaystationController;
 
 public class OI {
   // DRIVER CONTROLLER
-  Joystick driverController = new Joystick(RobotMap.DRIVER_CONTROLLER);
-  Button buttonCircle = new JoystickButton(driverController, 3);
-  Button buttonX = new JoystickButton(driverController, 2);
-  Button buttonSquare = new JoystickButton(driverController, 1);
-  Button buttonTriangle = new JoystickButton(driverController, 4);
-  Button buttonLeftBumper = new JoystickButton(driverController, 7);
-  Button buttonRightBumper = new JoystickButton(driverController, 8);
-  Button touchPad = new JoystickButton(driverController, 14);
-  Button buttonOptions = new JoystickButton(driverController, 10);
-  Button buttonShare = new JoystickButton(driverController, 9);
-  int flag = 0;
+  PlaystationController driverController = new PlaystationController(RobotMap.DRIVER_CONTROLLER);
 
   // OPERATOR CONTROLLER
-  Joystick operatorController = new Joystick(RobotMap.OPERATOR_CONTROLLER);
-  Button operatorButtonCircle = new JoystickButton(operatorController, 3);
-  Button operatorButtonX = new JoystickButton(operatorController, 2);
-  Button operatorButtonSquare = new JoystickButton(operatorController, 1);
-  Button operatorButtonTriangle = new JoystickButton(operatorController, 4);
-  Button operatorButtonLeftBumper = new JoystickButton(operatorController, 5);
-  Button operatorButtonRightBumper = new JoystickButton(operatorController, 6);
-  Button operatorButtonLeftStick = new JoystickButton(operatorController, 7);
-  Button operatorButtonRightStick = new JoystickButton(operatorController, 8);
-  Button operatorBouchPad = new JoystickButton(operatorController, 14);
-  Button operatorButtonOptions = new JoystickButton(operatorController, 10);
-  Button operatorButtonShare = new JoystickButton(operatorController, 9);
-  // Button operatorDPadUp = new JoystickButton(operatorController, 0);
-  Button operatorDPadRight = new JoystickButton(operatorController, 90);
-  Button operatorDPadDown = new JoystickButton(operatorController, 180);
-  Button operatorDPadLeft = new JoystickButton(operatorController, 270);
-  Button operatorRightTrigger = new JoystickButton(operatorController, 8);
-  Button operatorLeftTrigger = new JoystickButton(operatorController, 7);
+  PlaystationController operatorController = new PlaystationController(RobotMap.OPERATOR_CONTROLLER);
 
   public OI() {
-    //Start Driver controls
-    buttonCircle.whileHeld(new IntakeRun(-0.7));
-    buttonX.whileHeld(new IntakeRun(0.7));
-    buttonSquare.whileHeld(new IntakeDrop(Enums.IntakeDirection.FORWARD));
-    buttonTriangle.whileHeld(new IntakeDrop(Enums.IntakeDirection.REVERSE));
-    buttonOptions.whileHeld(new ClimberDeploy(.30, 1));
-    buttonShare.whileHeld(new ClimberDeploy(-.30, -1));
-    //buttonLeftBumper.whileHeld(new Auto());
-    //end driver controls
+    // Start Driver controls
+    driverController.triangle.whileHeld(new Belt(1));
+    driverController.square.whileHeld(new Belt(-1));
+    driverController.circle.whileHeld(new IntakeBall());
+    driverController.options.whileHeld(new IntakeDrop(IntakeDirection.FORWARD));
+    driverController.share.whileHeld(new IntakeDrop(IntakeDirection.REVERSE));
+    driverController.x.whileHeld(new ShooterShoot(0.8));
 
-    //Start Nicks operator controls
-    operatorButtonTriangle.whileHeld(new ShooterAim(-0.7));
-    operatorButtonSquare.whileHeld(new ShooterAim(0.7));
-    operatorButtonCircle.whileHeld(new ShooterShoot(-0.3));
-    operatorButtonX.whileHeld(new ShooterShoot(0.8));
-    
-    operatorButtonLeftBumper.whileHeld(new Belt(1));
-    operatorButtonRightBumper.whileHeld(new Belt(-1));
-    operatorRightTrigger.whileHeld(new ShooterShoot(0.8));
-    operatorButtonShare.whileHeld(new LimeLightShooterAlign(1, 0));
-    operatorButtonOptions.whileHeld(new LimeLightDriveAlign(DirectionEnum.STOP));
-    operatorLeftTrigger.whileHeld(new ShooterShoot(0.95));
-    //End Nicks operator controls
+    operatorController.circle.whileHeld(new ShooterAim(0.7));
+    operatorController.triangle.whileHeld(new ShooterAim(-0.7));
+    operatorController.rightTrigger.whileHeld(new LimeLightDriveAlign(DirectionEnum.STOP));
+    operatorController.options.whileHeld(new LimeLightShooterAlign(0, 0));
+    operatorController.square.whileHeld(new ShootSequence());
+    operatorController.x.whileHeld(new ShooterShoot(0.8));
+    operatorController.rightTrigger.whileHeld(new Belt(1));
+    operatorController.leftTrigger.whileHeld(new Belt(-1));
+    operatorController.dPad.right.whileHeld(new StartEndCommand(() -> {
+      Robot.m_DriveTrain.setLeftMotorBack(0.1);
+      Robot.m_DriveTrain.setLeftMotorFront(0.1);
+      Robot.m_DriveTrain.setRightMotorBack(0.1);
+      Robot.m_DriveTrain.setRightMotorFront(0.1);
+    }, () -> {
+      Robot.m_DriveTrain.setAll(0);
+    }, Robot.m_DriveTrain));
+    operatorController.dPad.left.whileHeld(new StartEndCommand(() -> {
+      Robot.m_DriveTrain.setLeftMotorBack(-0.1);
+      Robot.m_DriveTrain.setLeftMotorFront(-0.1);
+      Robot.m_DriveTrain.setRightMotorBack(-0.1);
+      Robot.m_DriveTrain.setRightMotorFront(-0.1);
+    }, () -> {
+      Robot.m_DriveTrain.setAll(0);
+    }, Robot.m_DriveTrain));
+    operatorController.dPad.up.whileHeld(new ShooterAim(-0.5));
+    operatorController.dPad.down.whileHeld(new ShooterAim(0.5));
+
+    // End Nicks operator controls
   }
 
   public double GetDriverRawStickAxis(int stickAxis) {
@@ -99,4 +84,4 @@ public class OI {
   }
 
 }
-//Sd changes needed in OI, ShootSequence, and Auto
+// Sd changes needed in OI, ShootSequence, and Auto
