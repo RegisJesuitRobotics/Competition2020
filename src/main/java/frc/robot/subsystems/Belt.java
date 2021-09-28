@@ -15,7 +15,7 @@ import frc.robot.RobotMap;
 /**
  * Add your docs here.
  */
-public class BeltOnly extends SubsystemBase {
+public class Belt extends SubsystemBase {
 
   private TalonSRX belt = new TalonSRX(RobotMap.BELT_PORT);
 

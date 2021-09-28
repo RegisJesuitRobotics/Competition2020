@@ -7,43 +7,35 @@
 
 package frc.robot.commands.LimelightStuff;
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Enums;
 import frc.robot.Robot;
 import frc.robot.Enums.DirectionEnum;
+import frc.robot.subsystems.Limelight;
 
 public class LimeLightDriveAlign extends CommandBase {
     Enums.DirectionEnum m_defaultDirection;
-    NetworkTableEntry tx;
-    NetworkTableEntry tv;
-    NetworkTable table;
+    Limelight limelight;
 
     public LimeLightDriveAlign(Enums.DirectionEnum defaultDirection) {
         m_defaultDirection = defaultDirection;
         // Use requires() here to declare subsystem dependencies align
         // eg. requires(chassis);
 
-        addRequirements(Robot.m_DriveTrain);
+        addRequirements(Robot.m_DriveTrain, Robot.m_Limelight);
+
+        this.limelight = Robot.m_Limelight;
     }
 
     // Called just before this Command runs the first time
     @Override
     public void initialize() {
-        NetworkTableInstance instance = NetworkTableInstance.getDefault();
-        table = instance.getTable("limelight-limeboi");
-        tx = table.getEntry("tx");
-        tv = table.getEntry("tv");
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     public void execute() {
-        boolean TVboolean = tv.getDouble(0.0) == 1;
-        if (!TVboolean) {
-            System.out.println("You do not hava a valid target");
+        if (!limelight.hasValidTarget()) {
             if (m_defaultDirection == DirectionEnum.STOP) {
                 Robot.m_DriveTrain.setAll(0.0);
             }
@@ -54,10 +46,9 @@ public class LimeLightDriveAlign extends CommandBase {
                 Robot.m_DriveTrain.setAll(-0.3);
             }
         } else {
-            int driveDirection = tx.getDouble(0.0) < 0 ? -1 : 1;
-            double txAbsValue = Math.abs(tx.getDouble(0.0));
+            int driveDirection = limelight.getXOffset() < 0 ? -1 : 1;
+            double txAbsValue = Math.abs(limelight.getXOffset());
             double motorValue = 0;
-            System.out.println("You have a valid target");
             if (txAbsValue > 10) {
                 motorValue = 0.3;
             } else {

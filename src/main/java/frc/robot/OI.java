@@ -13,7 +13,7 @@ import frc.robot.Enums.IntakeDirection;
 import frc.robot.commands.CommandGroups.ShootSequence;
 import frc.robot.commands.LimelightStuff.LimeLightDriveAlign;
 import frc.robot.commands.LimelightStuff.LimeLightShooterAlign;
-import frc.robot.commands.ShooterManual.Belt;
+import frc.robot.commands.ShooterManual.RunBelt;
 import frc.robot.commands.ShooterManual.IntakeBall;
 import frc.robot.commands.ShooterManual.IntakeDrop;
 //import frc.robot.commands.ShooterManual.IntakeRun;
@@ -30,8 +30,8 @@ public class OI {
 
   public OI() {
     // Start Driver controls
-    driverController.triangle.whileHeld(new Belt(1));
-    driverController.square.whileHeld(new Belt(-1));
+    driverController.triangle.whileHeld(new RunBelt(1));
+    driverController.square.whileHeld(new RunBelt(-1));
     driverController.circle.whileHeld(new IntakeBall());
     driverController.options.whileHeld(new IntakeDrop(IntakeDirection.FORWARD));
     driverController.share.whileHeld(new IntakeDrop(IntakeDirection.REVERSE));
@@ -43,8 +43,8 @@ public class OI {
     operatorController.options.whileHeld(new LimeLightShooterAlign(0, 0));
     operatorController.square.whileHeld(new ShootSequence());
     operatorController.x.whileHeld(new ShooterShoot(0.8));
-    operatorController.rightTrigger.whileHeld(new Belt(1));
-    operatorController.leftTrigger.whileHeld(new Belt(-1));
+    operatorController.rightTrigger.whileHeld(new RunBelt(1));
+    operatorController.leftTrigger.whileHeld(new RunBelt(-1));
     operatorController.dPad.right.whileHeld(new StartEndCommand(() -> {
       Robot.m_DriveTrain.setLeftMotorBack(0.1);
       Robot.m_DriveTrain.setLeftMotorFront(0.1);

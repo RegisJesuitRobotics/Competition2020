@@ -18,14 +18,14 @@ public class BeltAssist extends CommandBase {
   public BeltAssist(double m_motorSpeed) {
     // Use requires() here to declare subsystem dependencies
     motorSpeed = m_motorSpeed;
-    addRequirements(Robot.m_BeltOnly);
+    addRequirements(Robot.m_Belt);
     photoSensor = new DigitalInput(4);
   }
 
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
-    Robot.m_BeltOnly.belt(motorSpeed);
+    Robot.m_Belt.belt(motorSpeed);
     System.out.println(photoSensor.get());
   }
 
@@ -50,7 +50,7 @@ public class BeltAssist extends CommandBase {
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-    Robot.m_BeltOnly.belt(0);
+    Robot.m_Belt.belt(0);
   }
 
 }

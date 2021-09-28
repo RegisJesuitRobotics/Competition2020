@@ -7,24 +7,24 @@
 
 package frc.robot.commands.LimelightStuff;
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
+import frc.robot.subsystems.Limelight;
 
 public class LimeLightShooterAlign extends CommandBase {
+  Limelight limelight;
   int m_defaultDirection;
   double m_max;
 
   public LimeLightShooterAlign(int defaultDirection, double max) {
+    addRequirements(Robot.m_Shooter, Robot.m_Limelight);
+
     m_defaultDirection = defaultDirection;
     m_max = max;
     // Use requires() here to declare subsystem dependencies align
     // eg. requires(chassis);
-
-    addRequirements(Robot.m_Shooter);
+    this.limelight = Robot.m_Limelight;
   }
 
   // Called just before this Command runs the first time
@@ -35,12 +35,7 @@ public class LimeLightShooterAlign extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    NetworkTableInstance instance = NetworkTableInstance.getDefault();
-    NetworkTable table = instance.getTable("limelight-limeboi");
-    NetworkTableEntry ty = table.getEntry("ty");
-    NetworkTableEntry tv = table.getEntry("tv");
-    boolean TVboolean = tv.getDouble(0.0) == 1;
-    if (!TVboolean) {
+    if (!limelight.hasValidTarget()) {
       if (m_defaultDirection == 0) {
         Robot.m_UpAndDown.aim(0);
       }
@@ -50,14 +45,12 @@ public class LimeLightShooterAlign extends CommandBase {
       if (m_defaultDirection == -1) {
         Robot.m_UpAndDown.aim(0.2);
       }
-    }
-    if (TVboolean) {
-      if (ty.getDouble(0.0) > -10.5 - m_max) {
+    } else {
+      if (limelight.getYOffset() > -10.5 - m_max) {
         // go up
         SmartDashboard.putString("Shooter Align Status", "UP");
-
         Robot.m_UpAndDown.aim(-0.2);
-      } else if (ty.getDouble(0.0) < -12.5 - m_max) {
+      } else if (limelight.getYOffset() < -12.5 - m_max) {
         // go down
         SmartDashboard.putString("Shooter Align Status", "DOWN");
         Robot.m_UpAndDown.aim(0.15);
@@ -81,5 +74,3 @@ public class LimeLightShooterAlign extends CommandBase {
   }
 
 }
-
-// -7.8

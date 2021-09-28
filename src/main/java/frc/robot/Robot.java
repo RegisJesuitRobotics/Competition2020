@@ -7,9 +7,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -19,9 +16,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.Drive;
 import frc.robot.commands.CommandGroups.Auto;
-import frc.robot.subsystems.BeltOnly;
+import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.IntakeBar;
+import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.ShootWheels;
 import frc.robot.subsystems.UpAndDown;
 
@@ -30,18 +28,12 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
   public static DriveTrain m_DriveTrain = new DriveTrain();
   public static ShootWheels m_Shooter = new ShootWheels();
-  public static BeltOnly m_BeltOnly = new BeltOnly();
+  public static Belt m_Belt = new Belt();
   public static UpAndDown m_UpAndDown = new UpAndDown();
   public static IntakeBar m_IntakeBar = new IntakeBar();
+  public static Limelight m_Limelight = new Limelight();
   // public static ColorWheel m_ColorWheel = new ColorWheel();
   // read values periodically
-  NetworkTableInstance instance = NetworkTableInstance.getDefault();
-  NetworkTable table = instance.getTable("limelight-limeboi");
-  NetworkTable fms = instance.getTable("FMSInfo");
-  NetworkTableEntry g = fms.getEntry("StationNumber");
-  NetworkTableEntry ty = table.getEntry("ty");
-  NetworkTableEntry tx = table.getEntry("tx");
-  NetworkTableEntry tv = table.getEntry("tv");
   CommandBase m_autonomousCommand;
   PowerDistributionPanel PDP;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -87,9 +79,6 @@ public class Robot extends TimedRobot {
 
   private void autoTelePeriodic() {
     CommandScheduler.getInstance().run();
-    SmartDashboard.putNumber("TY(shoots best if between -10 and -11)", ty.getDouble(0.0));
-    SmartDashboard.putNumber("TX(shoots best if between -1 and 1)", tx.getDouble(0.0));
-    SmartDashboard.putBoolean("Valid Target?", tv.getDouble(0.0) == 1);
   }
 
   @Override
